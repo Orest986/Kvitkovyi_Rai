@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Популярні букети — Квітковий Рай</title>
+  <title>Каталог букетів — Квітковий Рай</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -14,10 +14,10 @@
     <div class="container nav-wrap">
       <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Квітковий Рай"></a>
       <nav class="nav" id="navMenu">
-        <a href="index.html#about">Про нас</a>
-        <a href="index.html#offers">Наші пропозиції</a>
-        <a href="#catalog">Популярні букети</a>
-        <a href="index.html#contacts">Контакти</a>
+        <a href="index.html#about" class="nav__link">Про нас</a>
+        <a href="index.html#offers" class="nav__link">Наші пропозиції</a>
+        <a href="#catalog" class="nav__link">Каталог</a>
+        <a href="index.html#contacts" class="nav__link">Контакти</a>
       </nav>
       <div class="header-right">
         <div class="social-links" aria-label="Соцмережі">
@@ -34,20 +34,42 @@
             <img src="assets/catalog-pill.svg" alt="Перейти в каталог">
           </a>
         </div>
-        <button class="burger" id="burger" aria-label="Меню">
+        <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
+  <!-- Мобільне меню overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-overlay__close" id="navClose" aria-label="Закрити меню">✕</button>
+    <nav class="nav-overlay__nav">
+      <a href="index.html#about">Про нас</a>
+      <a href="index.html#offers">Наші пропозиції</a>
+      <a href="#catalog">Каталог</a>
+      <a href="index.html#contacts">Контакти</a>
+      <div class="nav-overlay__social">
+        <a href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/tetana.mindza.2025" target="_blank" rel="noopener noreferrer">
+          <img src="assets/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://www.tiktok.com/@user3903590875616" target="_blank" rel="noopener noreferrer">
+          <img src="assets/tiktok.svg" alt="TikTok">
+        </a>
+      </div>
+    </nav>
+  </div>
+
   <section class="catalog-hero">
     <img class="catalog-hero-decor left" src="assets/hero-left.png" alt="">
     <img class="catalog-hero-decor right" src="assets/hero-right.png" alt="">
     <img class="catalog-petals-decor" src="assets/catalog-decor.png" alt="">
     <div class="container">
-      <h1 class="section-title" style="margin-bottom:8px">Популярні Букети</h1>
-      <p class="catalog-subtitle">Наші бестселлери — витончені букети та композиції,<br>які вибирають найчастіше.</p>
+      <h1 class="section-title" style="margin-bottom:8px">Наш каталог</h1>
+      <p class="catalog-subtitle">Кожен букет — це особлива історія.<br>Оберіть ту, що торкнеться серця.</p>
     </div>
   </section>
 
@@ -55,34 +77,34 @@
     <div class="container">
       <div class="product-grid">
 
-        <article class="product-card" data-bouquet="Біла Еустома" data-price="1850">
+        <article class="product-card" data-bouquet="Сніжна Ніжність" data-price="1850">
           <div class="inner">
-            <div class="image-wrap"><img src="assets/bouquet-white.svg" alt="Біла Еустома"></div>
-            <h3><span class="product-title">Біла Еустома</span></h3>
+            <div class="image-wrap"><img src="assets/bouquet-white.svg" alt="Сніжна Ніжність"></div>
+            <h3><span class="product-title">Сніжна Ніжність</span></h3>
             <div class="product-bottom">
-              <div class="price">1 850грн.</div>
+              <div class="price">1 850 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card" data-bouquet="Мікс Еустоми" data-price="850">
+        <article class="product-card" data-bouquet="Весняний Настрій" data-price="850">
           <div class="inner">
-            <div class="image-wrap"><img src="assets/bouquet-mix1.svg" alt="Мікс Еустоми"></div>
-            <h3><span class="product-title">Мікс Еустоми</span></h3>
+            <div class="image-wrap"><img src="assets/bouquet-mix1.svg" alt="Весняний Настрій"></div>
+            <h3><span class="product-title">Весняний Настрій</span></h3>
             <div class="product-bottom">
-              <div class="price">850грн.</div>
+              <div class="price">850 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card" data-bouquet="Мікс Еустоми Premium" data-price="1600">
+        <article class="product-card" data-bouquet="Рожева Мрія" data-price="1600">
           <div class="inner">
-            <div class="image-wrap"><img src="assets/bouquet-mix2.svg" alt="Мікс Еустоми"></div>
-            <h3><span class="product-title">Мікс Еустоми</span></h3>
+            <div class="image-wrap"><img src="assets/bouquet-mix2.svg" alt="Рожева Мрія"></div>
+            <h3><span class="product-title">Рожева Мрія</span></h3>
             <div class="product-bottom">
-              <div class="price">1 600грн.</div>
+              <div class="price">1 600 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -91,31 +113,31 @@
         <article class="product-card" data-bouquet="Біла Хризантема" data-price="1750">
           <div class="inner">
             <div class="image-wrap"><img src="assets/bouquet-chrysanthema.png" alt="Біла Хризантема"></div>
-            <h3><span class="product-title">Біла Хризантема</span></h3>
+            <h3><span class="product-title">Білосніжна Хризантема</span></h3>
             <div class="product-bottom">
-              <div class="price">1 750грн.</div>
+              <div class="price">1 750 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card" data-bouquet="Мікс Еустоми Violet" data-price="850">
+        <article class="product-card" data-bouquet="Фіолетова Елегантність" data-price="850">
           <div class="inner">
-            <div class="image-wrap"><img src="assets/bouquet-purple-mix.png" alt="Мікс Еустоми"></div>
-            <h3><span class="product-title">Мікс Еустоми</span></h3>
+            <div class="image-wrap"><img src="assets/bouquet-purple-mix.png" alt="Фіолетова Елегантність"></div>
+            <h3><span class="product-title">Фіолетова Елегантність</span></h3>
             <div class="product-bottom">
-              <div class="price">850грн.</div>
+              <div class="price">850 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
         </article>
 
-        <article class="product-card" data-bouquet="Мікс Еустоми Pink" data-price="1600">
+        <article class="product-card" data-bouquet="Ніжний Персик" data-price="1600">
           <div class="inner">
-            <div class="image-wrap"><img src="assets/bouquet-pink-mix.png" alt="Мікс Еустоми"></div>
-            <h3><span class="product-title">Мікс Еустоми</span></h3>
+            <div class="image-wrap"><img src="assets/bouquet-pink-mix.png" alt="Ніжний Персик"></div>
+            <h3><span class="product-title">Ніжний Персик</span></h3>
             <div class="product-bottom">
-              <div class="price">1 600грн.</div>
+              <div class="price">1 600 грн.</div>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -127,7 +149,6 @@
       </div>
     </div>
   </main>
-
 
   <div class="order-modal" id="orderModal" aria-hidden="true">
     <div class="order-modal__backdrop" data-close-order></div>
@@ -168,7 +189,7 @@
           </label>
           <label class="order-form__full">
             <span>Коментар до замовлення</span>
-            <textarea name="comment" rows="4" maxlength="300" placeholder="Наприклад, не телефонувати у двері"></textarea>
+            <textarea name="comment" rows="3" maxlength="300" placeholder="Наприклад, не телефонувати у двері"></textarea>
           </label>
           <label class="hp-field" aria-hidden="true">
             <span>Не заповнювати</span>

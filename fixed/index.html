@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Квітковий Рай</title>
+  <title>Квітковий Рай — квіткова майстерня</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -11,14 +11,15 @@
 </head>
 <body>
   <div class="site-shell">
+
     <header class="topbar">
       <div class="container nav-wrap">
         <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Квітковий Рай"></a>
         <nav class="nav" id="navMenu">
-          <a href="#about">Про нас</a>
-          <a href="#offers">Наші пропозиції</a>
-          <a href="#popular">Популярні букети</a>
-          <a href="#contacts">Контакти</a>
+          <a href="#about" class="nav__link">Про нас</a>
+          <a href="#offers" class="nav__link">Наші пропозиції</a>
+          <a href="#popular" class="nav__link">Популярні букети</a>
+          <a href="#contacts" class="nav__link">Контакти</a>
         </nav>
         <div class="header-right">
           <div class="social-links" aria-label="Соцмережі">
@@ -35,30 +36,51 @@
               <img src="assets/catalog-pill.svg" alt="Перейти в каталог">
             </a>
           </div>
-          <button class="burger" id="burger" aria-label="Меню">
+          <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false">
             <span></span><span></span><span></span>
           </button>
         </div>
       </div>
     </header>
 
+    <!-- Мобільне меню overlay -->
+    <div class="nav-overlay" id="navOverlay">
+      <button class="nav-overlay__close" id="navClose" aria-label="Закрити меню">✕</button>
+      <nav class="nav-overlay__nav">
+        <a href="#about">Про нас</a>
+        <a href="#offers">Наші пропозиції</a>
+        <a href="#popular">Популярні букети</a>
+        <a href="#contacts">Контакти</a>
+        <div class="nav-overlay__social">
+          <a href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/instagram.svg" alt="Instagram">
+          </a>
+          <a href="https://www.facebook.com/tetana.mindza.2025" target="_blank" rel="noopener noreferrer">
+            <img src="assets/facebook.svg" alt="Facebook">
+          </a>
+          <a href="https://www.tiktok.com/@user3903590875616" target="_blank" rel="noopener noreferrer">
+            <img src="assets/tiktok.svg" alt="TikTok">
+          </a>
+        </div>
+      </nav>
+    </div>
+
     <section class="hero" id="about">
       <img class="hero-decor left" src="assets/hero-left.png" alt="">
       <img class="hero-decor right" src="assets/hero-right.png" alt="">
 
-      <!-- Instagram банер -->
       <a class="insta-banner" href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <img class="insta-banner__icon" src="assets/instagram-icon.png" alt="Instagram">
         <div class="insta-banner__text">
           <span class="insta-banner__title">Ми в Instagram</span>
-          <span class="insta-banner__sub">Більше актуальних фото та пропозицій</span>
+          <span class="insta-banner__sub">Актуальні фото та нові надходження</span>
         </div>
         <span class="insta-banner__arrow">→</span>
       </a>
 
       <div class="container hero-content">
         <h1>Вітаємо в<br>Квітковому Раю!</h1>
-        <p>Місце, де естетика та краса поєднуються в кожній композиції.</p>
+        <p>Квіткова майстерня, де кожен букет — це маленький витвір мистецтва.</p>
       </div>
     </section>
 
@@ -71,17 +93,17 @@
           <article class="card offer-card">
             <div class="visual"><img src="assets/offer-flower.svg" alt="Широкий вибір"></div>
             <h3>Широкий вибір</h3>
-            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+            <p>Понад 50 видів квітів та композицій — від ніжних польових до розкішних троянд</p>
           </article>
           <article class="card offer-card">
             <div class="visual"><img src="assets/offer-hat.svg" alt="Досвідчені флористи"></div>
-            <h3>Досвідчені флористи</h3>
-            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+            <h3>Майстри своєї справи</h3>
+            <p>Наші флористи з багаторічним досвідом створять букет, який вразить до глибини душі</p>
           </article>
           <article class="card offer-card">
             <div class="visual"><img src="assets/offer-clock.svg" alt="Швидкий сервіс"></div>
-            <h3>Швидкий сервіс</h3>
-            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+            <h3>Швидка доставка</h3>
+            <p>Доставляємо свіжі квіти в день замовлення — щоб ваш момент не чекав</p>
           </article>
         </div>
       </section>
@@ -90,16 +112,16 @@
         <h2 class="section-title">Популярні Букети</h2>
         <div class="bouquet-grid">
           <article class="bouquet-card">
-            <div class="frame"><img src="assets/bouquet-white.svg" alt="Біла Еустома"></div>
-            <h3>Біла Еустома</h3>
+            <div class="frame"><img src="assets/bouquet-white.svg" alt="Сніжна Ніжність"></div>
+            <h3>Сніжна Ніжність</h3>
           </article>
           <article class="bouquet-card">
-            <div class="frame"><img src="assets/bouquet-mix1.svg" alt="Мікс Еустоми"></div>
-            <h3>Мікс Еустоми</h3>
+            <div class="frame"><img src="assets/bouquet-mix1.svg" alt="Весняний Настрій"></div>
+            <h3>Весняний Настрій</h3>
           </article>
           <article class="bouquet-card">
-            <div class="frame"><img src="assets/bouquet-mix2.svg" alt="Мікс Еустоми"></div>
-            <h3>Мікс Еустоми</h3>
+            <div class="frame"><img src="assets/bouquet-mix2.svg" alt="Рожева Мрія"></div>
+            <h3>Рожева Мрія</h3>
           </article>
         </div>
         <div class="cta-wrap">
@@ -115,7 +137,7 @@
           <div class="contact-grid">
             <div class="contact-box">
               <img src="assets/icon-location.png" alt="">
-              <div><strong>Локація:</strong><span>с/Голоби<br>вул.Зелена 28</span></div>
+              <div><strong>Локація:</strong><span>с. Голоби<br>вул. Зелена, 28</span></div>
             </div>
             <div class="contact-box">
               <img src="assets/icon-email.png" alt="">
@@ -123,25 +145,24 @@
             </div>
             <div class="contact-box">
               <img src="assets/icon-phone.png" alt="">
-              <div><strong>Номер телефону:</strong><span>+380 (97) 27 40 164</span></div>
+              <div><strong>Телефон:</strong><span>+380 (97) 27 40 164</span></div>
             </div>
             <div class="contact-box">
               <img src="assets/icon-time.png" alt="">
-              <div><strong>Працюємо:</strong><span>Пн.-Сб.<br>08:00-20:00</span></div>
+              <div><strong>Працюємо:</strong><span>Пн.–Сб.<br>08:00–20:00</span></div>
             </div>
           </div>
-
           <div class="review">
-            <h3>Напишіть Відгук</h3>
-            <p>Опишіть свої враження від нашого сайту, можна оцінку залишити внизу, то що ви хотіли змінити.</p>
+            <h3>Напишіть відгук</h3>
+            <p>Ваша думка допомагає нам ставати кращими. Розкажіть про свій досвід — будемо вдячні!</p>
             <form class="review-form">
-              <textarea placeholder="Ваш текст"></textarea>
+              <textarea placeholder="Ваш відгук..."></textarea>
               <button class="btn btn-send" type="button">➤</button>
             </form>
           </div>
         </div>
         <div class="ornament" style="margin-top:34px"></div>
-        <div class="copyright">© 2026 Квітковий Рай</div>
+        <div class="copyright">© 2026 Квітковий Рай — квіткова майстерня</div>
       </div>
     </footer>
   </div>

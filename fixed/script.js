@@ -1,11 +1,30 @@
-const burger = document.getElementById('burger');
-const navMenu = document.getElementById('navMenu');
-if (burger && navMenu) {
-  burger.addEventListener('click', () => navMenu.classList.toggle('open'));
-  navMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navMenu.classList.remove('open'));
-  });
+// ── Burger / overlay menu ──
+const burger     = document.getElementById('burger');
+const navOverlay = document.getElementById('navOverlay');
+const navClose   = document.getElementById('navClose');
+
+function openMenu() {
+  if (!navOverlay) return;
+  navOverlay.classList.add('is-open');
+  burger && burger.classList.add('is-open');
+  burger && burger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
 }
+function closeMenu() {
+  if (!navOverlay) return;
+  navOverlay.classList.remove('is-open');
+  burger && burger.classList.remove('is-open');
+  burger && burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+if (burger)   burger.addEventListener('click', openMenu);
+if (navClose) navClose.addEventListener('click', closeMenu);
+if (navOverlay) {
+  navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  navOverlay.addEventListener('click', e => { if (e.target === navOverlay) closeMenu(); });
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
 const orderModal = document.getElementById('orderModal');
 const orderForm = document.getElementById('orderForm');
