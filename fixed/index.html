@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Квітковий Рай</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Квітковий Рай"></a>
+        <nav class="nav" id="navMenu">
+          <a href="#about">Про нас</a>
+          <a href="#offers">Наші пропозиції</a>
+          <a href="#popular">Популярні букети</a>
+          <a href="#contacts">Контакти</a>
+        </nav>
+        <div class="header-right">
+          <div class="social-links" aria-label="Соцмережі">
+            <a class="social-link" href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src="assets/instagram.svg" alt="Instagram">
+            </a>
+            <a class="social-link" href="https://www.facebook.com/tetana.mindza.2025" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="assets/facebook.svg" alt="Facebook">
+            </a>
+            <a class="social-link" href="https://www.tiktok.com/@user3903590875616" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <img src="assets/tiktok.svg" alt="TikTok">
+            </a>
+            <a class="catalog-link" href="catalog.html" aria-label="Каталог">
+              <img src="assets/catalog-pill.svg" alt="Перейти в каталог">
+            </a>
+          </div>
+          <button class="burger" id="burger" aria-label="Меню">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" id="about">
+      <img class="hero-decor left" src="assets/hero-left.png" alt="">
+      <img class="hero-decor right" src="assets/hero-right.png" alt="">
+
+      <!-- Instagram банер -->
+      <a class="insta-banner" href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <img class="insta-banner__icon" src="assets/instagram-icon.png" alt="Instagram">
+        <div class="insta-banner__text">
+          <span class="insta-banner__title">Ми в Instagram</span>
+          <span class="insta-banner__sub">Більше актуальних фото та пропозицій</span>
+        </div>
+        <span class="insta-banner__arrow">→</span>
+      </a>
+
+      <div class="container hero-content">
+        <h1>Вітаємо в<br>Квітковому Раю!</h1>
+        <p>Місце, де естетика та краса поєднуються в кожній композиції.</p>
+      </div>
+    </section>
+
+    <main class="showcase">
+      <img class="hero-bouquet" src="assets/between-bouquet.png" alt="Декоративний букет">
+
+      <section class="offers container" id="offers">
+        <h2 class="section-title">Наші пропозиції</h2>
+        <div class="offer-grid">
+          <article class="card offer-card">
+            <div class="visual"><img src="assets/offer-flower.svg" alt="Широкий вибір"></div>
+            <h3>Широкий вибір</h3>
+            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+          </article>
+          <article class="card offer-card">
+            <div class="visual"><img src="assets/offer-hat.svg" alt="Досвідчені флористи"></div>
+            <h3>Досвідчені флористи</h3>
+            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+          </article>
+          <article class="card offer-card">
+            <div class="visual"><img src="assets/offer-clock.svg" alt="Швидкий сервіс"></div>
+            <h3>Швидкий сервіс</h3>
+            <p>Чудове аґате та прекрасні моменти в цій нашій кав'ярні</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="popular container" id="popular">
+        <h2 class="section-title">Популярні Букети</h2>
+        <div class="bouquet-grid">
+          <article class="bouquet-card">
+            <div class="frame"><img src="assets/bouquet-white.svg" alt="Біла Еустома"></div>
+            <h3>Біла Еустома</h3>
+          </article>
+          <article class="bouquet-card">
+            <div class="frame"><img src="assets/bouquet-mix1.svg" alt="Мікс Еустоми"></div>
+            <h3>Мікс Еустоми</h3>
+          </article>
+          <article class="bouquet-card">
+            <div class="frame"><img src="assets/bouquet-mix2.svg" alt="Мікс Еустоми"></div>
+            <h3>Мікс Еустоми</h3>
+          </article>
+        </div>
+        <div class="cta-wrap">
+          <a class="btn btn-primary" href="catalog.html">Переглянути всі букети</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+      <div class="container">
+        <div class="ornament"></div>
+        <div class="footer-grid">
+          <div class="contact-grid">
+            <div class="contact-box">
+              <img src="assets/icon-location.png" alt="">
+              <div><strong>Локація:</strong><span>с/Голоби<br>вул.Зелена 28</span></div>
+            </div>
+            <div class="contact-box">
+              <img src="assets/icon-email.png" alt="">
+              <div><strong>Email:</strong><span>mertsiana15@ukr.net</span></div>
+            </div>
+            <div class="contact-box">
+              <img src="assets/icon-phone.png" alt="">
+              <div><strong>Номер телефону:</strong><span>+380 (97) 27 40 164</span></div>
+            </div>
+            <div class="contact-box">
+              <img src="assets/icon-time.png" alt="">
+              <div><strong>Працюємо:</strong><span>Пн.-Сб.<br>08:00-20:00</span></div>
+            </div>
+          </div>
+
+          <div class="review">
+            <h3>Напишіть Відгук</h3>
+            <p>Опишіть свої враження від нашого сайту, можна оцінку залишити внизу, то що ви хотіли змінити.</p>
+            <form class="review-form">
+              <textarea placeholder="Ваш текст"></textarea>
+              <button class="btn btn-send" type="button">➤</button>
+            </form>
+          </div>
+        </div>
+        <div class="ornament" style="margin-top:34px"></div>
+        <div class="copyright">© 2026 Квітковий Рай</div>
+      </div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
