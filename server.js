@@ -1,170 +1,140 @@
 import express from "express";
-import dotenv from "dotenv";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-dotenv.config();
+// Спробуємо підключити dotenv (потрібен тільки локально)
+try {
+  const m = await import("dotenv");
+  m.default.config();
+} catch (_) {}
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
+
+const PORT            = Number(process.env.PORT) || 3000;
+const BOT_TOKEN       = process.env.BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
+const SITE_NAME       = process.env.SITE_NAME || "Квітковий Рай";
+const ADMIN_SECRET    = process.env.ADMIN_SECRET || "";
+const STATIC_DIR      = path.join(__dirname, "fixed");
+const LOG_PATH        = path.join(__dirname, "orders.log");
+
+process.on("uncaughtException",  (e) => console.error("UNCAUGHT", e));
+process.on("unhandledRejection", (e) => console.error("UNHANDLED", e));
+
+console.log("=== SERVER STARTING ===");
+console.log("PORT:", PORT);
+console.log("BOT_TOKEN set:", !!BOT_TOKEN);
+console.log("CHAT_ID set:",   !!TELEGRAM_CHAT_ID);
+console.log("STATIC_DIR:",    STATIC_DIR);
+
 const app = express();
-
-const PORT = Number(process.env.PORT || 3000);
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const SITE_NAME = process.env.SITE_NAME || "Квітковий Рай";
-const ADMIN_SECRET = process.env.ADMIN_SECRET || "";
-const LOG_PATH = path.join(__dirname, "orders.log");
-const STATIC_DIR = path.join(__dirname, "fixed");
-
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(STATIC_DIR));
 
-function cleanText(value, maxLength = 300) {
-  return String(value || "")
-    .replace(/[<>]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, maxLength);
+// ── helpers ──────────────────────────────────────────
+
+function clean(val, max = 300) {
+  return String(val || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, max);
 }
 
-function validateOrder(raw) {
-  const order = {
-    bouquet: cleanText(raw.bouquet, 120),
-    price: cleanText(raw.price, 20),
-    name: cleanText(raw.name, 80),
-    phone: cleanText(raw.phone, 25).replace(/[\s\-()]/g, ""),
-    deliveryDate: cleanText(raw.deliveryDate, 20),
-    deliveryTime: cleanText(raw.deliveryTime, 10),
-    address: cleanText(raw.address, 180),
-    cardText: cleanText(raw.cardText, 180),
-    comment: cleanText(raw.comment, 300),
-    company: cleanText(raw.company, 100),
+function validate(raw) {
+  const o = {
+    bouquet:      clean(raw.bouquet,      120),
+    price:        clean(raw.price,         20),
+    name:         clean(raw.name,          80),
+    phone:        clean(raw.phone,         25).replace(/[\s\-()]/g, ""),
+    deliveryDate: clean(raw.deliveryDate,  20),
+    deliveryTime: clean(raw.deliveryTime,  10),
+    address:      clean(raw.address,      180),
+    cardText:     clean(raw.cardText,     180),
+    comment:      clean(raw.comment,      300),
+    company:      clean(raw.company,      100),
   };
-
-  if (order.company) {
-    throw new Error("Запит не пройшов перевірку.");
-  }
-  if (!order.bouquet) {
-    throw new Error("Не вдалося визначити вибраний букет.");
-  }
-  if (!order.name || order.name.length < 2) {
-    throw new Error("Вкажіть ім'я клієнта.");
-  }
-  if (!/^\+?[0-9]{10,15}$/.test(order.phone)) {
-    throw new Error("Вкажіть коректний номер телефону.");
-  }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(order.deliveryDate)) {
-    throw new Error("Вкажіть дату доставки.");
-  }
-  if (!/^\d{2}:\d{2}$/.test(order.deliveryTime)) {
-    throw new Error("Вкажіть час доставки.");
-  }
-  if (!order.address || order.address.length < 8) {
-    throw new Error("Вкажіть повну адресу доставки.");
-  }
-
-  return order;
+  if (o.company)                          throw new Error("Запит не пройшов перевірку.");
+  if (!o.bouquet)                         throw new Error("Не вдалося визначити букет.");
+  if (!o.name || o.name.length < 2)       throw new Error("Вкажіть ім'я.");
+  if (!/^\+?[0-9]{10,15}$/.test(o.phone))throw new Error("Невірний номер телефону.");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(o.deliveryDate)) throw new Error("Вкажіть дату.");
+  if (!/^\d{2}:\d{2}$/.test(o.deliveryTime))        throw new Error("Вкажіть час.");
+  if (!o.address || o.address.length < 8) throw new Error("Вкажіть адресу.");
+  return o;
 }
 
-function appendOrderLog(order, req) {
-  const entry = {
-    createdAt: new Date().toISOString(),
-    ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown",
-    userAgent: req.headers["user-agent"] || "unknown",
-    ...order,
-  };
-  fs.appendFileSync(LOG_PATH, JSON.stringify(entry) + "
-", "utf-8");
+function logOrder(order, req) {
+  try {
+    const entry = { at: new Date().toISOString(), ip: req.ip, ...order };
+    fs.appendFileSync(LOG_PATH, JSON.stringify(entry) + "\n", "utf-8");
+  } catch (_) {}
 }
 
-function formatTelegramMessage(order) {
+function tgMessage(o) {
   return [
-    "🌷 <b>Нове замовлення</b>",
-    "",
-    `<b>Букет:</b> ${order.bouquet}`,
-    order.price ? `<b>Ціна:</b> ${order.price} грн` : null,
-    `<b>Клієнт:</b> ${order.name}`,
-    `<b>Телефон:</b> <code>${order.phone}</code>`,
-    `<b>Дата доставки:</b> ${order.deliveryDate}`,
-    `<b>Час доставки:</b> ${order.deliveryTime}`,
-    `<b>Адреса:</b> ${order.address}`,
-    `<b>Листівка:</b> ${order.cardText || "—"}`,
-    `<b>Коментар:</b> ${order.comment || "—"}`,
-    "",
-    `<b>Сайт:</b> ${SITE_NAME}`,
-  ].filter(Boolean).join("
-");
+    "🌷 <b>Нове замовлення</b>", "",
+    `<b>Букет:</b> ${o.bouquet}`,
+    o.price ? `<b>Ціна:</b> ${o.price} грн` : null,
+    `<b>Клієнт:</b> ${o.name}`,
+    `<b>Телефон:</b> <code>${o.phone}</code>`,
+    `<b>Дата:</b> ${o.deliveryDate}  <b>Час:</b> ${o.deliveryTime}`,
+    `<b>Адреса:</b> ${o.address}`,
+    `<b>Листівка:</b> ${o.cardText || "—"}`,
+    `<b>Коментар:</b> ${o.comment || "—"}`,
+    "", `<b>Сайт:</b> ${SITE_NAME}`,
+  ].filter(v => v !== null).join("\n");
 }
 
-async function sendTelegramMessage(text) {
-  if (!BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    throw new Error("Не заповнені BOT_TOKEN або TELEGRAM_CHAT_ID у .env");
-  }
-
-  const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+async function sendTg(text) {
+  if (!BOT_TOKEN || !TELEGRAM_CHAT_ID) throw new Error("BOT_TOKEN або TELEGRAM_CHAT_ID не вказані.");
+  const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CHAT_ID,
-      text,
-      parse_mode: "HTML",
-      disable_web_page_preview: true,
-    }),
+    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "HTML", disable_web_page_preview: true }),
   });
-
-  const data = await response.json();
-  if (!response.ok || !data.ok) {
-    throw new Error(data.description || "Telegram не прийняв повідомлення.");
-  }
-  return data;
+  const d = await r.json();
+  if (!r.ok || !d.ok) throw new Error(d.description || "Telegram помилка.");
 }
+
+// ── routes ───────────────────────────────────────────
+
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true, time: new Date().toISOString() });
+});
 
 app.post("/api/order", async (req, res) => {
   try {
-    const order = validateOrder(req.body || {});
-    appendOrderLog(order, req);
-    await sendTelegramMessage(formatTelegramMessage(order));
-
-    res.json({ ok: true, message: "Дякуємо! Ваше замовлення прийнято. Флорист скоро його побачить." });
-  } catch (error) {
-    console.error("ORDER_ERROR", error);
-    res.status(400).json({ ok: false, message: error.message || "Не вдалося обробити замовлення." });
+    const order = validate(req.body || {});
+    logOrder(order, req);
+    await sendTg(tgMessage(order));
+    res.json({ ok: true, message: "Замовлення прийнято! Флорист скоро зателефонує." });
+  } catch (e) {
+    console.error("ORDER_ERROR:", e.message);
+    res.status(400).json({ ok: false, message: e.message });
   }
-});
-
-app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, service: "flower-orders", time: new Date().toISOString() });
 });
 
 app.post("/api/test-telegram", async (req, res) => {
+  if (req.headers["x-admin-secret"] !== ADMIN_SECRET)
+    return res.status(403).json({ ok: false, message: "Немає доступу." });
   try {
-    const secret = req.headers["x-admin-secret"];
-    if (!ADMIN_SECRET || secret !== ADMIN_SECRET) {
-      return res.status(403).json({ ok: false, message: "Немає доступу." });
-    }
-    await sendTelegramMessage("✅ <b>Тестове повідомлення</b>
-Бот підключено успішно.");
-    res.json({ ok: true, message: "Тестове повідомлення відправлено." });
-  } catch (error) {
-    console.error("TELEGRAM_TEST_ERROR", error);
-    res.status(400).json({ ok: false, message: error.message || "Не вдалося відправити тест." });
+    await sendTg("✅ <b>Тест</b>\nБот працює!");
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(400).json({ ok: false, message: e.message });
   }
 });
 
+app.get(["/catalog", "/catalog.html"], (_req, res) =>
+  res.sendFile(path.join(STATIC_DIR, "catalog.html"))
+);
 app.get("*", (req, res, next) => {
   if (req.path.startsWith("/api/")) return next();
-  if (req.path === "/" || req.path === "/index.html") {
-    return res.sendFile(path.join(STATIC_DIR, "index.html"));
-  }
-  if (req.path === "/catalog" || req.path === "/catalog.html") {
-    return res.sendFile(path.join(STATIC_DIR, "catalog.html"));
-  }
-  return res.status(404).send("Сторінку не знайдено.");
+  res.sendFile(path.join(STATIC_DIR, "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Kvitkovyi Rai server is running on http://localhost:${PORT}`);
+// ── start ─────────────────────────────────────────────
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`=== SERVER READY on 0.0.0.0:${PORT} ===`);
 });
