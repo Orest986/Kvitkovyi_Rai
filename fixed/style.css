@@ -135,7 +135,7 @@ button, input, textarea { font: inherit }
 /* ── HERO ───────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 620px;
+  min-height: 410px;
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
 }
