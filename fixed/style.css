@@ -98,9 +98,12 @@ button, input, textarea { font: inherit }
   backdrop-filter: blur(12px);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
-  transition: opacity .3s ease;
+  visibility: hidden;                /* не займає місце, не впливає на layout */
+  transition: opacity .3s ease, visibility .3s ease;
 }
-.nav-overlay.is-open { opacity: 1; pointer-events: all }
+.nav-overlay.is-open {
+  opacity: 1; pointer-events: all; visibility: visible;
+}
 
 .nav-overlay__close {
   position: absolute; top: 20px; right: 20px;
@@ -135,9 +138,10 @@ button, input, textarea { font: inherit }
 /* ── HERO ───────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 620px;
+  min-height: 580px;
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
+  padding-bottom: 80px;
 }
 .hero::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 130px;
@@ -194,7 +198,6 @@ button, input, textarea { font: inherit }
 /* ── SHOWCASE (2nd screen) ──────────────── */
 .showcase {
   position: relative;
-  /* Фон прив'язаний до всього блоку — не пливе */
   background: url("assets/section-bg.png") center top / cover no-repeat;
   background-attachment: scroll;
   margin-top: 0;
@@ -205,11 +208,11 @@ button, input, textarea { font: inherit }
 /* Букет між секціями */
 .hero-bouquet {
   display: block;
-  width: min(52vw, 580px);
-  margin: -100px auto 0;
+  width: min(62vw, 720px);   /* більший */
+  margin: -220px auto 0;     /* вище — більше перекриває hero */
   position: relative; z-index: 5;
   pointer-events: none;
-  filter: drop-shadow(0 20px 40px rgba(80,57,42,.14));
+  filter: drop-shadow(0 24px 48px rgba(80,57,42,.16));
 }
 
 /* ── OFFERS ─────────────────────────────── */
@@ -470,7 +473,7 @@ body.modal-open { overflow: hidden }
 @media (max-width: 1280px) {
   :root { --container: 960px }
   .nav { gap: 32px }
-  .hero-bouquet { width: min(54vw, 520px); margin-top: -80px }
+  .hero-bouquet { width: min(60vw, 600px); margin-top: -180px }
 }
 
 /* 1024px */
@@ -479,7 +482,7 @@ body.modal-open { overflow: hidden }
   .nav { gap: 22px; font-size: 19px }
   .brand img { width: 160px }
   .hero { min-height: 560px }
-  .hero-bouquet { width: min(58vw, 480px); margin-top: -70px }
+  .hero-bouquet { width: min(64vw, 520px); margin-top: -160px }
   .offer-grid { gap: 18px }
   .bouquet-grid { gap: 22px }
   .product-grid { gap: 20px }
@@ -499,7 +502,7 @@ body.modal-open { overflow: hidden }
   .hero { min-height: 480px }
   .hero-content { padding-top: 48px }
   .hero-decor { width: min(32vw, 240px) }
-  .hero-bouquet { width: min(70vw, 420px); margin-top: -60px }
+  .hero-bouquet { width: min(74vw, 460px); margin-top: -140px }
   .insta-banner { top: 12px; right: 12px; max-width: 240px; padding: 8px 12px 8px 10px }
   .insta-banner__icon { width: 34px; height: 34px }
   .insta-banner__title { font-size: 13px }
@@ -540,7 +543,7 @@ body.modal-open { overflow: hidden }
   .hero-content { padding-top: 36px }
   .hero-decor { width: 38vw }
   .hero::after { height: 90px }
-  .hero-bouquet { width: min(80vw, 320px); margin-top: -50px }
+  .hero-bouquet { width: min(82vw, 380px); margin-top: -110px }
   .insta-banner { display: none }
 
   .offers { padding: 36px 0 28px }
@@ -571,7 +574,7 @@ body.modal-open { overflow: hidden }
 /* 360px — маленький телефон */
 @media (max-width: 360px) {
   .brand img { width: 116px }
-  .hero-bouquet { width: 84vw; margin-top: -40px }
+  .hero-bouquet { width: 88vw; margin-top: -80px }
   .bouquet-grid { max-width: 270px }
   .product-grid { max-width: 300px }
   .offer-grid { max-width: 290px }
