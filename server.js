@@ -57,9 +57,7 @@ function validate(raw) {
   if (!o.bouquet)                         throw new Error("Не вдалося визначити букет.");
   if (!o.name || o.name.length < 2)       throw new Error("Вкажіть ім'я.");
   if (!/^\+?[0-9]{10,15}$/.test(o.phone))throw new Error("Невірний номер телефону.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(o.deliveryDate)) throw new Error("Вкажіть дату.");
-  if (!/^\d{2}:\d{2}$/.test(o.deliveryTime))        throw new Error("Вкажіть час.");
-  if (!o.address || o.address.length < 8) throw new Error("Вкажіть адресу.");
+  // Поля доставки необов'язкові — флорист уточнить при дзвінку
   return o;
 }
 

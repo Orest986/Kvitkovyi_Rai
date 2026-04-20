@@ -740,3 +740,28 @@ body.modal-open { overflow: hidden }
   .loc-row span   { font-size: 15px }
   .btn-route { font-size: 16px; min-height: 50px }
 }
+
+/* ── Кнопки на картках популярних букетів (головна) ── */
+.bouquet-card__actions {
+  margin-top: 12px;
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.bouquet-card__price {
+  font-size: 20px; font-weight: 700; color: var(--text);
+}
+.bouquet-card__btns {
+  display: flex; gap: 8px; width: 100%; justify-content: center;
+}
+.bouquet-card__btns .btn-add-cart,
+.bouquet-card__btns .btn-order {
+  flex: 1; min-height: 40px; font-size: 15px; padding: 7px 10px;
+}
+
+/* ── Виправлення форми без полів доставки ── */
+.order-form__grid { grid-template-columns: repeat(2, 1fr) }
+
+@media (max-width: 768px) {
+  .bouquet-card__btns { flex-direction: column }
+  .bouquet-card__btns .btn-add-cart,
+  .bouquet-card__btns .btn-order { width: 100% }
+}

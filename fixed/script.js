@@ -25,44 +25,69 @@ burger?.addEventListener('click', openMenu);
 navClose?.addEventListener('click', closeMenu);
 navOverlay?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 navOverlay?.addEventListener('click', e => { if (e.target === navOverlay) closeMenu(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeOrderModal(); } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeMenu(); closeCartModal(); closeOrderModal(); }
+});
 
-// ═══════════════════════════════════════
-//   КОШИК (cart)
-// ═══════════════════════════════════════
-let cart = [];   // [{bouquet, price, qty}]
+/* ═══════════════════════════════════════
+   КОШИК
+   ═══════════════════════════════════════ */
+let cart = []; // [{ bouquet, price, qty }]
 
-function cartTotal() {
-  return cart.reduce((s, i) => s + i.price * i.qty, 0);
-}
-function cartCount() {
-  return cart.reduce((s, i) => s + i.qty, 0);
-}
+const cartTotal  = () => cart.reduce((s, i) => s + i.price * i.qty, 0);
+const cartCount  = () => cart.reduce((s, i) => s + i.qty, 0);
 
+/* -- Оновити значок кількості у всіх кнопках кошика -- */
 function updateCartBadge() {
+  const n = cartCount();
   document.querySelectorAll('.cart-badge').forEach(b => {
-    const n = cartCount();
     b.textContent = n;
     b.hidden = n === 0;
   });
 }
 
+/* -- Додати товар до кошика -- */
+function addToCart(card) {
+  if (!card) return;
+  const bouquet  = card.dataset.bouquet || 'Букет';
+  const price    = Number(card.dataset.price) || 0;
+  const existing = cart.find(i => i.bouquet === bouquet);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ bouquet, price, qty: 1 });
+  }
+  updateCartBadge();
+
+  /* Анімація кнопки */
+  const btn = card.querySelector('.btn-add-cart');
+  if (btn) {
+    btn.textContent = '✓ Додано';
+    btn.classList.add('btn--added');
+    setTimeout(() => {
+      btn.textContent = 'До кошика';
+      btn.classList.remove('btn--added');
+    }, 1200);
+  }
+}
+
+/* -- Рендер списку кошика -- */
 function renderCartItems() {
-  const list = document.getElementById('cartList');
-  const total = document.getElementById('cartTotal');
-  if (!list) return;
+  const listEl  = document.getElementById('cartList');
+  const totalEl = document.getElementById('cartTotal');
+  if (!listEl) return;
 
   if (cart.length === 0) {
-    list.innerHTML = '<p class="cart-empty">Кошик порожній</p>';
-    if (total) total.textContent = '';
+    listEl.innerHTML = '<p class="cart-empty">Кошик порожній 🌸</p>';
+    if (totalEl) totalEl.textContent = '';
     return;
   }
 
-  list.innerHTML = cart.map((item, idx) => `
+  listEl.innerHTML = cart.map((item, idx) => `
     <div class="cart-item">
       <div class="cart-item__info">
         <span class="cart-item__name">${item.bouquet}</span>
-        <span class="cart-item__price">${item.price} грн × ${item.qty}</span>
+        <span class="cart-item__price">${item.price.toLocaleString('uk-UA')} грн × ${item.qty} = ${(item.price * item.qty).toLocaleString('uk-UA')} грн</span>
       </div>
       <div class="cart-item__controls">
         <button class="cart-qty-btn" data-action="dec" data-idx="${idx}">−</button>
@@ -73,9 +98,12 @@ function renderCartItems() {
     </div>
   `).join('');
 
-  if (total) total.textContent = `Разом: ${cartTotal().toLocaleString('uk-UA')} грн`;
+  if (totalEl) {
+    totalEl.textContent = `Разом: ${cartTotal().toLocaleString('uk-UA')} грн`;
+  }
 
-  list.querySelectorAll('.cart-qty-btn').forEach(btn => {
+  /* Обробники кнопок кількості */
+  listEl.querySelectorAll('.cart-qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = +btn.dataset.idx;
       if (btn.dataset.action === 'inc') {
@@ -86,58 +114,32 @@ function renderCartItems() {
       }
       updateCartBadge();
       renderCartItems();
-      syncCartOrderSummary();
     });
   });
-  list.querySelectorAll('.cart-remove-btn').forEach(btn => {
+
+  /* Обробники кнопок видалення */
+  listEl.querySelectorAll('.cart-remove-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       cart.splice(+btn.dataset.idx, 1);
       updateCartBadge();
       renderCartItems();
-      syncCartOrderSummary();
     });
   });
 }
 
-function syncCartOrderSummary() {
-  const el = document.getElementById('cartOrderSummary');
-  if (!el) return;
-  if (cart.length === 0) {
-    el.textContent = 'Кошик порожній';
-    return;
-  }
-  el.textContent = cart.map(i => `${i.bouquet} × ${i.qty}`).join(', ') + ` — ${cartTotal().toLocaleString('uk-UA')} грн`;
+/* -- Формуємо рядок для форми замовлення -- */
+function buildCartSummary() {
+  if (cart.length === 0) return { bouquet: '', price: 0 };
+  const bouquet = cart.map(i => `${i.bouquet} × ${i.qty} шт.`).join(', ');
+  return { bouquet, price: cartTotal() };
 }
 
-function addToCart(card) {
-  const bouquet = card?.dataset?.bouquet || 'Букет';
-  const price   = +(card?.dataset?.price  || 0);
-  const existing = cart.find(i => i.bouquet === bouquet);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ bouquet, price, qty: 1 });
-  }
-  updateCartBadge();
-
-  // Показати анімацію "Додано"
-  const btn = card?.querySelector('.btn-add-cart');
-  if (btn) {
-    btn.textContent = '✓ Додано';
-    btn.classList.add('btn--added');
-    setTimeout(() => { btn.textContent = 'До кошика'; btn.classList.remove('btn--added'); }, 1200);
-  }
-}
-
-// ── Cart modal ─────────────────────────
-const cartModal    = document.getElementById('cartModal');
-const cartOpenBtns = document.querySelectorAll('[data-open-cart]');
-const cartCloseBtns= document.querySelectorAll('[data-close-cart]');
+/* ── Відкрити/закрити кошик ── */
+const cartModal = document.getElementById('cartModal');
 
 function openCartModal() {
   if (!cartModal) return;
   renderCartItems();
-  syncCartOrderSummary();
   cartModal.classList.add('is-open');
   cartModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
@@ -149,62 +151,59 @@ function closeCartModal() {
   document.body.classList.remove('modal-open');
 }
 
-cartOpenBtns.forEach(b => b.addEventListener('click', openCartModal));
-cartCloseBtns.forEach(b => b.addEventListener('click', closeCartModal));
-cartModal?.querySelector('.order-modal__backdrop')?.addEventListener('click', closeCartModal);
+document.querySelectorAll('[data-open-cart]').forEach(b => b.addEventListener('click', openCartModal));
+document.querySelectorAll('[data-close-cart]').forEach(b => b.addEventListener('click', closeCartModal));
 
-// "Оформити замовлення" з кошика → переходить до форми
+/* Кнопка "Оформити замовлення" з кошика */
 document.getElementById('cartCheckoutBtn')?.addEventListener('click', () => {
   if (cart.length === 0) return;
   closeCartModal();
-  openOrderModal(null);   // null = кошик
+  openOrderModal(null); // null = оформляємо з кошика
 });
 
-// ── Add-to-cart buttons ────────────────
+/* ── Кнопки "До кошика" ── */
 document.querySelectorAll('.btn-add-cart').forEach(btn => {
   btn.addEventListener('click', () => addToCart(btn.closest('.product-card')));
 });
 
-// Кнопка "Замовити" (одразу форма, без кошика)
-document.querySelectorAll('.btn-order').forEach(btn => {
-  btn.addEventListener('click', () => openOrderModal(btn.closest('.product-card')));
-});
-
-// ═══════════════════════════════════════
-//   ORDER MODAL
-// ═══════════════════════════════════════
+/* ═══════════════════════════════════════
+   ФОРМА ЗАМОВЛЕННЯ
+   ═══════════════════════════════════════ */
 const orderModal           = document.getElementById('orderModal');
 const orderForm            = document.getElementById('orderForm');
 const selectedBouquetLabel = document.getElementById('selectedBouquetLabel');
-const orderBouquet         = document.getElementById('orderBouquet');
-const orderPrice           = document.getElementById('orderPrice');
-const orderStatus          = document.getElementById('orderFormStatus');
+const orderBouquetInput    = document.getElementById('orderBouquet');
+const orderPriceInput      = document.getElementById('orderPrice');
+const orderStatusEl        = document.getElementById('orderFormStatus');
 
 function openOrderModal(card) {
   if (!orderModal || !orderForm) return;
 
-  orderStatus.textContent = '';
-  orderStatus.className   = 'order-form__status';
+  /* Скидаємо форму */
   orderForm.reset();
+  if (orderStatusEl) { orderStatusEl.textContent = ''; orderStatusEl.className = 'order-form__status'; }
 
   if (card) {
-    // Одиночне замовлення
+    /* Одиночне замовлення — з кнопки "Замовити" */
     const bouquet = card.dataset.bouquet || 'Букет';
     const price   = card.dataset.price   || '';
-    orderBouquet.value = bouquet;
-    orderPrice.value   = price;
-    if (selectedBouquetLabel)
-      selectedBouquetLabel.textContent = price ? `${bouquet} — ${price} грн` : bouquet;
-    orderBouquet.value = bouquet;
-    orderPrice.value   = price;
+    if (orderBouquetInput) orderBouquetInput.value = bouquet;
+    if (orderPriceInput)   orderPriceInput.value   = price;
+    if (selectedBouquetLabel) {
+      selectedBouquetLabel.textContent = price
+        ? `${bouquet} — ${Number(price).toLocaleString('uk-UA')} грн`
+        : bouquet;
+    }
   } else {
-    // Замовлення з кошика
-    const summary = cart.map(i => `${i.bouquet} × ${i.qty}`).join(', ');
-    const total   = cartTotal();
-    orderBouquet.value = summary;
-    orderPrice.value   = total;
-    if (selectedBouquetLabel)
-      selectedBouquetLabel.textContent = `${summary} — ${total.toLocaleString('uk-UA')} грн`;
+    /* Замовлення з кошика */
+    const { bouquet, price } = buildCartSummary();
+    if (orderBouquetInput) orderBouquetInput.value = bouquet;
+    if (orderPriceInput)   orderPriceInput.value   = price;
+    if (selectedBouquetLabel) {
+      selectedBouquetLabel.textContent = cart.length > 0
+        ? `${bouquet} — ${price.toLocaleString('uk-UA')} грн`
+        : 'Кошик порожній';
+    }
   }
 
   orderModal.classList.add('is-open');
@@ -222,41 +221,56 @@ function closeOrderModal() {
 
 document.querySelectorAll('[data-close-order]').forEach(n => n.addEventListener('click', closeOrderModal));
 
+/* Кнопки "Замовити" — одиночно */
+document.querySelectorAll('.btn-order').forEach(btn => {
+  btn.addEventListener('click', () => openOrderModal(btn.closest('.product-card')));
+});
+
+/* -- Відправка форми -- */
 function showStatus(msg, type) {
-  if (!orderStatus) return;
-  orderStatus.textContent = msg;
-  orderStatus.className   = `order-form__status is-${type}`;
+  if (!orderStatusEl) return;
+  orderStatusEl.textContent = msg;
+  orderStatusEl.className   = `order-form__status is-${type}`;
 }
 
 if (orderForm) {
   orderForm.addEventListener('submit', async e => {
     e.preventDefault();
-    const data    = Object.fromEntries(new FormData(orderForm));
+    const data = Object.fromEntries(new FormData(orderForm));
+
+    /* Honeypot */
     if (data.company) { showStatus('Замовлення не пройшло перевірку.', 'error'); return; }
 
-    data.phone = (data.phone || '').replace(/[\s\-()]/g, '');
+    /* Валідація телефону */
+    data.phone = (data.phone || '').replace(/[\s\-()']/g, '');
     if (!/^\+?[0-9]{10,15}$/.test(data.phone)) {
       showStatus('Вкажіть коректний номер телефону.', 'error'); return;
     }
+
+    /* Якщо поля доставки відсутні — встановимо порожні значення щоб server.js не падав */
+    data.deliveryDate = data.deliveryDate || '0000-00-00';
+    data.deliveryTime = data.deliveryTime || '00:00';
+    data.address      = data.address      || 'уточнити при дзвінку';
 
     const submitBtn = orderForm.querySelector('button[type="submit"]');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Надсилаємо...'; }
 
     try {
-      const res  = await fetch('/api/order', {
+      const res    = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
       const result = await res.json();
-      if (!res.ok || !result.ok) throw new Error(result.message || 'Помилка.');
-      showStatus(result.message || 'Дякуємо! Замовлення прийнято.', 'success');
+      if (!res.ok || !result.ok) throw new Error(result.message || 'Помилка сервера.');
+
+      showStatus('✅ Дякуємо! Замовлення прийнято. Ми зателефонуємо для підтвердження.', 'success');
       cart = [];
       updateCartBadge();
       orderForm.reset();
-      setTimeout(closeOrderModal, 1800);
+      setTimeout(closeOrderModal, 2200);
     } catch (err) {
-      showStatus(err.message || 'Сталася помилка.', 'error');
+      showStatus(err.message || 'Сталася помилка. Спробуйте ще раз.', 'error');
     } finally {
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Підтвердити замовлення'; }
     }

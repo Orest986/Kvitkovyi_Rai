@@ -107,17 +107,38 @@
     <section class="popular container" id="popular">
       <h2 class="section-title">Популярні Букети</h2>
       <div class="bouquet-grid">
-        <article class="bouquet-card">
+        <article class="bouquet-card product-card" data-bouquet="Сніжна Ніжність" data-price="1850">
           <div class="frame"><img src="assets/bouquet-white.svg" alt="Сніжна Ніжність"></div>
           <h3>Сніжна Ніжність</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">1 850 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
         </article>
-        <article class="bouquet-card">
+        <article class="bouquet-card product-card" data-bouquet="Весняний Настрій" data-price="850">
           <div class="frame"><img src="assets/bouquet-mix1.svg" alt="Весняний Настрій"></div>
           <h3>Весняний Настрій</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">850 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
         </article>
-        <article class="bouquet-card">
+        <article class="bouquet-card product-card" data-bouquet="Рожева Мрія" data-price="1600">
           <div class="frame"><img src="assets/bouquet-mix2.svg" alt="Рожева Мрія"></div>
           <h3>Рожева Мрія</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">1 600 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
         </article>
       </div>
       <div class="cta-wrap">
@@ -255,9 +276,6 @@
       <div class="order-form__grid">
         <label><span>Ваше ім'я</span><input type="text" name="name" maxlength="80" required placeholder="Наприклад, Тетяна"></label>
         <label><span>Телефон</span><input type="tel" name="phone" maxlength="25" required placeholder="+380..."></label>
-        <label><span>Дата доставки</span><input type="date" name="deliveryDate" required></label>
-        <label><span>Час доставки</span><input type="time" name="deliveryTime" required></label>
-        <label class="order-form__full"><span>Адреса доставки</span><input type="text" name="address" maxlength="180" required placeholder="Місто, вулиця, будинок, квартира"></label>
         <label class="order-form__full"><span>Текст до листівки</span><input type="text" name="cardText" maxlength="180" placeholder="Необов'язково"></label>
         <label class="order-form__full"><span>Коментар</span><textarea name="comment" rows="3" maxlength="300" placeholder="Наприклад, зателефонувати за 30 хв до доставки"></textarea></label>
         <label class="hp-field" aria-hidden="true"><span>Не заповнювати</span><input type="text" name="company" tabindex="-1" autocomplete="off"></label>
