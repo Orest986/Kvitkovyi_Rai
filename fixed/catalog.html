@@ -48,6 +48,7 @@
       <a href="index.html#about">Про нас</a>
       <a href="index.html#offers">Наші пропозиції</a>
       <a href="#catalog">Каталог</a>
+      <a href="index.html#location">Локація</a>
       <a href="index.html#contacts">Контакти</a>
       <div class="nav-overlay__social">
         <a href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer">
@@ -83,6 +84,7 @@
             <h3><span class="product-title">Сніжна Ніжність</span></h3>
             <div class="product-bottom">
               <div class="price">1 850 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -94,6 +96,7 @@
             <h3><span class="product-title">Весняний Настрій</span></h3>
             <div class="product-bottom">
               <div class="price">850 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -105,6 +108,7 @@
             <h3><span class="product-title">Рожева Мрія</span></h3>
             <div class="product-bottom">
               <div class="price">1 600 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -116,6 +120,7 @@
             <h3><span class="product-title">Білосніжна Хризантема</span></h3>
             <div class="product-bottom">
               <div class="price">1 750 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -127,6 +132,7 @@
             <h3><span class="product-title">Фіолетова Елегантність</span></h3>
             <div class="product-bottom">
               <div class="price">850 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -138,6 +144,7 @@
             <h3><span class="product-title">Ніжний Персик</span></h3>
             <div class="product-bottom">
               <div class="price">1 600 грн.</div>
+              <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order" type="button">Замовити</button>
             </div>
           </div>
@@ -203,6 +210,24 @@
       </form>
     </div>
   </div>
+
+<!-- ── CART MODAL ── -->
+<div class="order-modal" id="cartModal" aria-hidden="true">
+  <div class="order-modal__backdrop" data-close-cart></div>
+  <div class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+    <button class="order-modal__close" type="button" aria-label="Закрити" data-close-cart>&times;</button>
+    <div class="order-modal__head">
+      <p class="order-modal__eyebrow">Ваш вибір</p>
+      <h2 id="cartModalTitle">Кошик</h2>
+    </div>
+    <div id="cartList" class="cart-list"></div>
+    <div id="cartTotal" class="cart-total"></div>
+    <div class="order-form__actions" style="margin-top:20px">
+      <button class="btn btn-primary" id="cartCheckoutBtn">Оформити замовлення</button>
+    </div>
+  </div>
+</div>
+
 
   <script src="script.js"></script>
 </body>
