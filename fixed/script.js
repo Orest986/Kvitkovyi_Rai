@@ -206,6 +206,7 @@ function openOrderModal(card) {
     }
   }
 
+  showOrderThumb(card);
   orderModal.classList.add('is-open');
   orderModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
@@ -275,4 +276,72 @@ if (orderForm) {
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Підтвердити замовлення'; }
     }
   });
+}
+
+/* ── Back to top ──────────────────────── */
+const backTopBtn = document.getElementById('backTopBtn');
+if (backTopBtn) {
+  window.addEventListener('scroll', () => {
+    backTopBtn.classList.toggle('is-visible', window.scrollY > 400);
+  }, { passive: true });
+  backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+/* ── "Детальніше" — розгортання панелі ── */
+document.querySelectorAll('.btn-details').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.dataset.detail;
+    const panel    = document.getElementById(targetId);
+    if (!panel) return;
+    const isOpen = panel.classList.contains('is-open');
+
+    // Закрити всі інші
+    document.querySelectorAll('.offer-detail.is-open').forEach(p => {
+      p.classList.remove('is-open');
+      const b = document.querySelector(`[data-detail="${p.id}"]`);
+      if (b) b.classList.remove('is-open');
+    });
+
+    if (!isOpen) {
+      panel.classList.add('is-open');
+      btn.classList.add('is-open');
+    }
+  });
+});
+
+/* ── Показ мініатюри букету у модалці ─── */
+function showOrderThumb(card) {
+  const thumb     = document.getElementById('orderModalThumb');
+  const thumbImg  = document.getElementById('orderModalThumbImg');
+  const thumbName = document.getElementById('orderModalThumbName');
+  const thumbPrice= document.getElementById('orderModalThumbPrice');
+  if (!thumb) return;
+
+  if (card) {
+    const img  = card.querySelector('.image-wrap img, .frame img');
+    const name = card.dataset.bouquet || '';
+    const price= card.dataset.price   || '';
+    if (img && name) {
+      thumbImg.src        = img.src;
+      thumbName.textContent = name;
+      thumbPrice.textContent = price ? `${Number(price).toLocaleString('uk-UA')} грн` : '';
+      thumb.style.display = 'flex';
+      return;
+    }
+  }
+
+  // Кошик — показуємо перший елемент
+  if (cart.length > 0) {
+    const first = cart[0];
+    // Шукаємо зображення за назвою
+    const cardEl = [...document.querySelectorAll('.product-card')]
+      .find(c => c.dataset.bouquet === first.bouquet);
+    const img = cardEl?.querySelector('.image-wrap img, .frame img');
+    thumbImg.src          = img?.src || '';
+    thumbName.textContent = cart.length === 1 ? first.bouquet : `${cart.length} букети у кошику`;
+    thumbPrice.textContent = `${cartTotal().toLocaleString('uk-UA')} грн`;
+    thumb.style.display   = 'flex';
+  } else {
+    thumb.style.display = 'none';
+  }
 }

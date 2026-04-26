@@ -37,8 +37,8 @@
         </button>
         <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false">
           <span></span><span></span><span></span>
-        </button>  
-      </div>  
+        </button>
+      </div>
     </div>
   </header>
 
@@ -89,16 +89,55 @@
           <div class="visual"><img src="assets/offer-flower.svg" alt="Широкий вибір"></div>
           <h3>Широкий вибір</h3>
           <p>Понад 50 видів квітів та композицій — від ніжних польових до розкішних троянд</p>
+          <button class="btn-details" data-detail="detail-1" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-1">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Еустоми, хризантеми, піони — у наявності щодня</li>
+                <li>Понад 50 сортів сезонних та екзотичних квітів</li>
+                <li>Готові букети та композиції під будь-який бюджет</li>
+                <li>Індивідуальне складання за вашими побажаннями</li>
+              </ul>
+            </div>
+          </div>
         </article>
         <article class="card offer-card">
           <div class="visual"><img src="assets/offer-hat.svg" alt="Майстри справи"></div>
           <h3>Майстри своєї справи</h3>
           <p>Наші флористи з багаторічним досвідом створять букет, який вразить до глибини душі</p>
+          <button class="btn-details" data-detail="detail-2" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-2">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Флористи з досвідом від 5 років</li>
+                <li>Консультація по підбору букету — безкоштовно</li>
+                <li>Авторські техніки оформлення та пакування</li>
+                <li>Листівка та стрічка — у подарунок до кожного замовлення</li>
+              </ul>
+            </div>
+          </div>
         </article>
         <article class="card offer-card">
           <div class="visual"><img src="assets/offer-clock.svg" alt="Швидка доставка"></div>
           <h3>Швидка доставка</h3>
           <p>Доставляємо свіжі квіти в день замовлення — щоб ваш момент не чекав</p>
+          <button class="btn-details" data-detail="detail-3" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-3">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Доставка по Грибовиці та навколишніх селах</li>
+                <li>Замовлення до 16:00 — доставка в той самий день</li>
+                <li>Зручне узгодження часу — телефоном або у Telegram</li>
+                <li>Акуратна упаковка для безпечного перевезення</li>
+              </ul>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -161,7 +200,7 @@
         <div class="map-wrap">
          <iframe
             title="Квітковий Рай на карті"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d571.974494727403!2d24.244379569631956!3d50.678934948039014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4724f172bdc2f253%3A0x14d12ed4c86b0600!2z0JrQstGW0YLQutC-0LLQuNC5INCg0LDQuQ!5e1!3m2!1suk!2sua!4v1776951865741!5m2!1suk!2sua"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d680.1957339282067!2d24.24493519678481!3d50.678962877986166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1suk!2sua!4v1776711162355!5m2!1suk!2sua"
             width="100%" height="100%"
             style="border:0; border-radius:20px;"
             allowfullscreen loading="lazy"
@@ -195,12 +234,10 @@
             </div>
           </div>
 
-          <a class="btn btn-route"
-   target="_blank"
-   rel="noopener noreferrer"
-   href="https://www.google.com/maps/dir/?api=1&destination=50.6789349,24.2443796">
-   🗺 Прокласти маршрут
-</a>
+          <a class="btn btn-route" target="_blank" rel="noopener noreferrer"
+             href="https://www.google.com/maps/dir/?api=1&destination=Грибовиця,+Нововолинська+міська+громада,+Волинська+область,+Україна">
+            🗺 Прокласти маршрут
+          </a>
         </div>
       </div>
     </div>
@@ -243,6 +280,9 @@
     </div>
   </footer>
 
+  <!-- ── BACK TO TOP ── -->
+  <button class="back-top-btn" id="backTopBtn" aria-label="Вгору">↑</button>
+
 </div><!-- /site-shell -->
 
 <!-- ── CART MODAL ── -->
@@ -270,6 +310,13 @@
     <div class="order-modal__head">
       <p class="order-modal__eyebrow">Оформлення замовлення</p>
       <h2 id="orderModalTitle">Замовити букет</h2>
+      <div class="order-modal__thumb" id="orderModalThumb" style="display:none">
+        <img id="orderModalThumbImg" src="" alt="Букет">
+        <div class="order-modal__thumb-info">
+          <span class="order-modal__thumb-name" id="orderModalThumbName"></span>
+          <span class="order-modal__thumb-price" id="orderModalThumbPrice"></span>
+        </div>
+      </div>
       <p class="order-modal__selected" id="selectedBouquetLabel"></p>
     </div>
     <form class="order-form" id="orderForm" novalidate>
