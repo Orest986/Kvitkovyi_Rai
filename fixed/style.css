@@ -22,7 +22,7 @@ img   { max-width: 100%; display: block }
 a     { text-decoration: none; color: inherit }
 button, input, textarea { font: inherit }
 
-.site-shell { overflow-x: hidden }
+.site-shell { overflow-x: clip; padding-top: var(--topbar-h) }  /* clip не ламає sticky */
 .container  { width: min(var(--container), calc(100% - 48px)); margin: 0 auto; position: relative }
 
 .section-title {
@@ -36,9 +36,8 @@ button, input, textarea { font: inherit }
 
 /* ── TOPBAR ─────────────────────────────── */
 .topbar {
-  position: sticky; top: 0; z-index: 50;
-  background: url("assets/header-bg.png") center/cover no-repeat, rgba(250,245,238,.96);
-  backdrop-filter: blur(8px);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: url("assets/header-bg.png") center/cover no-repeat, rgba(250,245,238,.97);
   border-bottom: 1px solid var(--line);
 }
 .nav-wrap {
@@ -67,10 +66,20 @@ button, input, textarea { font: inherit }
 }
 .social-link:hover, .catalog-link:hover {
   transform: translateY(-2px);
-  filter: drop-shadow(0 6px 14px rgba(145,112,90,.28));
 }
 .social-link img  { width: 28px; height: 28px }
 .catalog-link img { width: 54px; height: 30px }
+.order-catalog-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 20px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 999px; cursor: pointer;
+  font-size: 15px; font-weight: 700;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+  white-space: nowrap;
+}
+.order-catalog-btn:hover { background: var(--accent-dark); transform: translateY(-1px) }
 
 /* Burger */
 .burger {
@@ -95,8 +104,7 @@ button, input, textarea { font: inherit }
 /* ── NAV OVERLAY (mobile) ──────────────── */
 .nav-overlay {
   position: fixed; inset: 0; z-index: 55;
-  background: rgba(247,241,235,.97);
-  backdrop-filter: blur(12px);
+  background: rgba(247,241,235,.98);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
@@ -131,7 +139,7 @@ button, input, textarea { font: inherit }
 /* ── HERO — точно 100vh ─────────────────── */
 .hero {
   position: relative;
-  height: calc(100vh - var(--topbar-h));
+  height: 100vh;
   min-height: 500px;
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
@@ -171,9 +179,8 @@ button, input, textarea { font: inherit }
   position: absolute; top: 18px; right: 20px; z-index: 10;
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px 10px 12px;
-  background: rgba(255,255,255,.48);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,.68);
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(205,179,159,.3);
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(120,80,60,.10);
   color: var(--text); max-width: 290px;
@@ -489,7 +496,7 @@ body.modal-open { overflow: hidden }
 .order-modal.is-open { display: block }
 .order-modal__backdrop {
   position: absolute; inset: 0;
-  background: rgba(42,28,20,.44); backdrop-filter: blur(4px);
+  background: rgba(42,28,20,.55);
 }
 .order-modal__dialog {
   position: relative; z-index: 1;
@@ -547,18 +554,44 @@ body.modal-open { overflow: hidden }
 .hp-field { position: absolute !important; left: -9999px !important; opacity: 0 !important; pointer-events: none !important }
 .btn[disabled] { opacity: .72; cursor: wait }
 
+/* ── КНОПКИ ХЕДЕРА ─────────────────────── */
+/* Кнопка "Замовити" → каталог */
+.order-catalog-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 20px;
+  background: var(--accent); color: #fff;
+  border-radius: 999px; font-size: 16px; font-weight: 700;
+  white-space: nowrap;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 14px rgba(145,112,90,.20);
+}
+.order-catalog-btn:hover { background: var(--accent-dark); transform: translateY(-1px) }
+
+/* Кнопка "← На головну" (каталог) */
+.back-to-main-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 38px; padding: 0 16px;
+  background: rgba(205,179,159,.2); color: var(--text);
+  border-radius: 999px; font-size: 15px; font-weight: 600;
+  border: 1px solid rgba(205,179,159,.4);
+  white-space: nowrap;
+  transition: background .2s, transform .2s;
+}
+.back-to-main-btn:hover { background: rgba(205,179,159,.42); transform: translateY(-1px) }
+
 /* ── КОШИК ──────────────────────────────── */
+/* Кнопка кошика (є лише у каталозі) */
 .cart-btn {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   border: none; border-radius: 12px;
   background: rgba(205,179,159,.2);
   cursor: pointer; color: var(--text);
   transition: background .2s, transform .2s;
 }
 .cart-btn:hover { background: rgba(205,179,159,.4); transform: translateY(-1px) }
-.cart-btn svg { width: 22px; height: 22px; pointer-events: none }
+.cart-btn svg { width: 20px; height: 20px; pointer-events: none }
 .cart-badge {
   position: absolute; top: -5px; right: -5px;
   min-width: 18px; height: 18px; padding: 0 4px;
@@ -648,25 +681,40 @@ body.modal-open { overflow: hidden }
 
 /* 1600px+ великі монітори */
 @media (min-width: 1600px) {
-  :root { --container: 1360px }
-  .nav { gap: 48px; font-size: 22px }
-  .hero h1 { font-size: 108px }
-  .hero p  { font-size: 28px; max-width: 600px }
-  .hero-bouquet { width: min(52vw, 800px); margin-top: -260px }
-  .section-title { font-size: 80px }
+  :root { --container: 1280px; --topbar-h: 96px }
+  .nav { gap: 44px; font-size: 21px }
+  .brand img { width: 200px }
+  .hero h1 { font-size: 104px }
+  .hero p  { font-size: 26px; max-width: 580px }
+  .hero-bouquet { width: min(54vw, 780px); margin-top: -250px }
+  .section-title { font-size: 78px }
+  .offer-grid { gap: 28px }
+  .product-grid { gap: 32px }
+  .bouquet-grid { gap: 36px }
 }
 
 /* 1400px */
 @media (min-width: 1400px) and (max-width: 1599px) {
-  :root { --container: 1280px }
-  .hero-bouquet { width: min(54vw, 740px); margin-top: -250px }
+  :root { --container: 1180px; --topbar-h: 92px }
+  .nav { gap: 40px; font-size: 20px }
+  .brand img { width: 195px }
+  .hero h1 { font-size: 100px }
+  .hero p  { font-size: 25px }
+  .hero-bouquet { width: min(54vw, 720px); margin-top: -240px }
+  .section-title { font-size: 74px }
+  .offer-grid { gap: 26px }
+  .product-grid { gap: 28px }
+  .bouquet-grid { gap: 32px }
 }
 
 /* 1280px */
 @media (max-width: 1280px) {
-  :root { --container: 1040px }
-  .nav { gap: 28px; font-size: 18px }
+  :root { --container: 1040px; --topbar-h: 84px }
+  .nav { gap: 26px; font-size: 18px }
   .hero-bouquet { width: min(60vw, 640px); margin-top: -220px }
+  .offer-grid { gap: 20px }
+  .product-grid { gap: 22px }
+  .bouquet-grid { gap: 24px }
 }
 
 /* 1100px */
@@ -697,6 +745,8 @@ body.modal-open { overflow: hidden }
   .brand img { width: 150px }
   .social-link img  { width: 26px; height: 26px }
   .catalog-link img { width: 48px; height: 27px }
+  .order-catalog-btn { font-size: 14px; padding: 0 14px; height: 36px }
+  .back-to-main-btn  { font-size: 13px; padding: 0 12px; height: 34px }
 
   .hero-decor { width: min(30vw, 220px) }
   .hero-bouquet { width: min(72vw, 480px); margin-top: -160px }
@@ -739,7 +789,9 @@ body.modal-open { overflow: hidden }
   :root { --topbar-h: 64px }
   .brand img { width: 128px }
   .header-right .social-links { display: none }
-  .catalog-link img { width: 44px; height: 25px }
+  .catalog-link img { display: none }
+  .order-catalog-btn { font-size: 13px; padding: 0 12px; height: 34px }
+  .back-to-main-btn  { font-size: 12px; padding: 0 10px; height: 32px }
 
   .hero-decor { width: 40vw }
   .hero::after { height: 100px }
