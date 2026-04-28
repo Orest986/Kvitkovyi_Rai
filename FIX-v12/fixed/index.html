@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Квітковий Рай — квіткова майстерня</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="site-shell">
+
+  <!-- ── HEADER ── -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Квітковий Рай"></a>
+      <nav class="nav" id="navMenu">
+        <a href="#about"    class="nav__link">Про нас</a>
+        <a href="#offers"   class="nav__link">Пропозиції</a>
+        <a href="#popular"  class="nav__link">Букети</a>
+        <a href="#location" class="nav__link">Локація</a>
+        <a href="#contacts" class="nav__link">Контакти</a>
+      </nav>
+      <div class="header-right">
+        <div class="social-links">
+          <a class="social-link" href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="assets/instagram.svg" alt="Instagram"></a>
+          <a class="social-link" href="https://www.facebook.com/tetana.mindza.2025"   target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="assets/facebook.svg"  alt="Facebook"></a>
+          <a class="social-link" href="https://www.tiktok.com/@user3903590875616"       target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="assets/tiktok.svg"    alt="TikTok"></a>
+        </div>
+        <a class="order-catalog-btn" href="catalog.html">Замовити</a>
+        <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MOBILE OVERLAY ── -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-overlay__close" id="navClose" aria-label="Закрити меню">✕</button>
+    <nav class="nav-overlay__nav">
+      <a href="#about">Про нас</a>
+      <a href="#offers">Пропозиції</a>
+      <a href="#popular">Букети</a>
+      <a href="#location">Локація</a>
+      <a href="#contacts">Контакти</a>
+      <div class="nav-overlay__social">
+        <a href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.svg" alt="Instagram"></a>
+        <a href="https://www.facebook.com/tetana.mindza.2025"   target="_blank" rel="noopener noreferrer"><img src="assets/facebook.svg"  alt="Facebook"></a>
+        <a href="https://www.tiktok.com/@user3903590875616"       target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.svg"    alt="TikTok"></a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="about">
+    <img class="hero-decor left"  src="assets/hero-left.png"  alt="">
+    <img class="hero-decor right" src="assets/hero-right.png" alt="">
+    <a class="insta-banner" href="https://www.instagram.com/mindziatetiana/" target="_blank" rel="noopener noreferrer">
+      <img class="insta-banner__icon" src="assets/instagram-icon.png" alt="Instagram">
+      <div class="insta-banner__text">
+        <span class="insta-banner__title">Ми в Instagram</span>
+        <span class="insta-banner__sub">Актуальні фото та нові надходження</span>
+      </div>
+      <span class="insta-banner__arrow">→</span>
+    </a>
+    <div class="container hero-content">
+      <h1>Вітаємо в<br>Квітковому Раю!</h1>
+      <p>Квіткова майстерня, де кожен букет — це маленький витвір мистецтва.</p>
+    </div>
+  </section>
+
+  <!-- ── SHOWCASE ── -->
+  <main class="showcase">
+    <img class="hero-bouquet" src="assets/between-bouquet.png" alt="Декоративний букет">
+
+    <!-- OFFERS -->
+    <section class="offers container" id="offers">
+      <h2 class="section-title">Наші пропозиції</h2>
+      <div class="offer-grid">
+        <article class="card offer-card">
+          <div class="visual"><img src="assets/offer-flower.svg" alt="Широкий вибір"></div>
+          <h3>Широкий вибір</h3>
+          <p>Понад 50 видів квітів та композицій — від ніжних польових до розкішних троянд</p>
+          <button class="btn-details" data-detail="detail-1" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-1">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Еустоми, хризантеми, піони — у наявності щодня</li>
+                <li>Понад 50 сортів сезонних та екзотичних квітів</li>
+                <li>Готові букети та композиції під будь-який бюджет</li>
+                <li>Індивідуальне складання за вашими побажаннями</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card offer-card">
+          <div class="visual"><img src="assets/offer-hat.svg" alt="Майстри справи"></div>
+          <h3>Майстри своєї справи</h3>
+          <p>Наші флористи з багаторічним досвідом створять букет, який вразить до глибини душі</p>
+          <button class="btn-details" data-detail="detail-2" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-2">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Флористи з досвідом від 5 років</li>
+                <li>Консультація по підбору букету — безкоштовно</li>
+                <li>Авторські техніки оформлення та пакування</li>
+                <li>Листівка та стрічка — у подарунок до кожного замовлення</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="card offer-card">
+          <div class="visual"><img src="assets/offer-clock.svg" alt="Оптова торгівля"></div>
+          <h3>Оптова торгівля</h3>
+          <p>Постачаємо свіжі квіти оптом для магазинів, флористів та агентств</p>
+          <button class="btn-details" data-detail="detail-3" type="button">
+            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="offer-detail" id="detail-3">
+            <div class="offer-detail__inner">
+              <ul>
+                <li>Відправка по всій Україні через Нову Пошту</li>
+                <li>Надійна упаковка для збереження свіжості у дорозі</li>
+                <li>Відстеження посилки на кожному етапі доставки</li>
+                <li>Оптові знижки від 10 букетів — уточнюйте умови</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- POPULAR -->
+    <section class="popular container" id="popular">
+      <h2 class="section-title">Популярні Букети</h2>
+      <div class="bouquet-grid">
+        <article class="bouquet-card product-card" data-bouquet="Сніжна Ніжність" data-price="1850">
+          <div class="frame"><img src="assets/bouquet-white.svg" alt="Сніжна Ніжність"></div>
+          <h3>Сніжна Ніжність</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">1 850 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
+        </article>
+        <article class="bouquet-card product-card" data-bouquet="Весняний Настрій" data-price="850">
+          <div class="frame"><img src="assets/bouquet-mix1.svg" alt="Весняний Настрій"></div>
+          <h3>Весняний Настрій</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">850 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
+        </article>
+        <article class="bouquet-card product-card" data-bouquet="Рожева Мрія" data-price="1600">
+          <div class="frame"><img src="assets/bouquet-mix2.svg" alt="Рожева Мрія"></div>
+          <h3>Рожева Мрія</h3>
+          <div class="bouquet-card__actions">
+            <span class="bouquet-card__price">1 600 грн</span>
+            <div class="bouquet-card__btns">
+              <button class="btn btn-add-cart" type="button">До кошика</button>
+              <button class="btn btn-order"    type="button">Замовити</button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="cta-wrap">
+        <a class="btn btn-primary" href="catalog.html">Переглянути всі букети</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── LOCATION ── -->
+  <section class="location-section" id="location">
+    <!-- Декоративні квіти по кутах -->
+    <img class="loc-decor loc-decor--tl" src="assets/hero-left.png"  alt="">
+    <img class="loc-decor loc-decor--br" src="assets/hero-right.png" alt="">
+
+    <div class="container">
+      <h2 class="section-title">Як нас знайти</h2>
+
+      <div class="location-grid">
+        <!-- Карта -->
+        <div class="map-wrap">
+         <iframe
+            title="Квітковий Рай на карті"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d680.1957339282067!2d24.24493519678481!3d50.678962877986166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1suk!2sua!4v1776711162355!5m2!1suk!2sua"
+            width="100%" height="100%"
+            style="border:0; border-radius:20px;"
+            allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- Контактна картка -->
+        <div class="location-card">
+          <div class="location-card__info">
+            <div class="loc-row">
+              <span class="loc-icon">📍</span>
+              <div>
+                <strong>Адреса</strong>
+                <span>с. Грибовиця, вул.Зелена 28<br>Волинська область</span>
+              </div>
+            </div>
+            <div class="loc-row">
+              <span class="loc-icon">📞</span>
+              <div>
+                <strong>Телефон</strong>
+                <span><a href="tel:+380972740164">+380 (97) 27 40 164</a></span>
+              </div>
+            </div>
+            <div class="loc-row">
+              <span class="loc-icon">🕐</span>
+              <div>
+                <strong>Режим роботи</strong>
+                <span>Пн – Пт: 08:00 – 20:00<br>Сб: 09:00 – 18:00<br>Нд: вихідний</span>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn btn-route" target="_blank" rel="noopener noreferrer"
+             href="https://www.google.com/maps/dir/?api=1&destination=Грибовиця,+Нововолинська+міська+громада,+Волинська+область,+Україна">
+            🗺 Прокласти маршрут
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER / CONTACTS ── -->
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <div class="ornament"></div>
+      <div class="footer-grid">
+        <div class="contact-grid">
+          <div class="contact-box">
+            <img src="assets/icon-location.png" alt="">
+            <div><strong>Локація:</strong><span>с. Грибовиця<br>Волинська обл.</span></div>
+          </div>
+          <div class="contact-box">
+            <img src="assets/icon-email.png" alt="">
+            <div><strong>Email:</strong><span>mertsiana15@ukr.net</span></div>
+          </div>
+          <div class="contact-box">
+            <img src="assets/icon-phone.png" alt="">
+            <div><strong>Телефон:</strong><span>+380 (97) 27 40 164</span></div>
+          </div>
+          <div class="contact-box">
+            <img src="assets/icon-time.png" alt="">
+            <div><strong>Працюємо:</strong><span>Пн.–Сб.<br>08:00–20:00</span></div>
+          </div>
+        </div>
+        <div class="review">
+          <h3>Напишіть відгук</h3>
+          <p>Ваша думка допомагає нам ставати кращими. Розкажіть про свій досвід — будемо вдячні!</p>
+          <form class="review-form">
+            <textarea placeholder="Ваш відгук..."></textarea>
+            <button class="btn btn-send" type="button">➤</button>
+          </form>
+        </div>
+      </div>
+      <div class="ornament" style="margin-top:34px"></div>
+      <div class="copyright">© 2026 Квітковий Рай — квіткова майстерня</div>
+    </div>
+  </footer>
+
+  <!-- ── BACK TO TOP ── -->
+  <button class="back-top-btn" id="backTopBtn" aria-label="Вгору">↑</button>
+
+</div><!-- /site-shell -->
+
+<!-- ── CART MODAL ── -->
+<div class="order-modal" id="cartModal" aria-hidden="true">
+  <div class="order-modal__backdrop" data-close-cart></div>
+  <div class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+    <button class="order-modal__close" type="button" aria-label="Закрити" data-close-cart>&times;</button>
+    <div class="order-modal__head">
+      <p class="order-modal__eyebrow">Ваш вибір</p>
+      <h2 id="cartModalTitle">Кошик</h2>
+    </div>
+    <div id="cartList" class="cart-list"></div>
+    <div id="cartTotal" class="cart-total"></div>
+    <div class="order-form__actions" style="margin-top:20px">
+      <button class="btn btn-primary" id="cartCheckoutBtn">Оформити замовлення</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ORDER MODAL ── -->
+<div class="order-modal" id="orderModal" aria-hidden="true">
+  <div class="order-modal__backdrop" data-close-order></div>
+  <div class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <button class="order-modal__close" type="button" aria-label="Закрити" data-close-order>&times;</button>
+    <div class="order-modal__head">
+      <p class="order-modal__eyebrow">Оформлення замовлення</p>
+      <h2 id="orderModalTitle">Замовити букет</h2>
+      <div class="order-modal__thumb" id="orderModalThumb" style="display:none">
+        <img id="orderModalThumbImg" src="" alt="Букет">
+        <div class="order-modal__thumb-info">
+          <span class="order-modal__thumb-name" id="orderModalThumbName"></span>
+          <span class="order-modal__thumb-price" id="orderModalThumbPrice"></span>
+        </div>
+      </div>
+      <p class="order-modal__selected" id="selectedBouquetLabel"></p>
+    </div>
+    <form class="order-form" id="orderForm" novalidate>
+      <input type="hidden" name="bouquet" id="orderBouquet">
+      <input type="hidden" name="price"   id="orderPrice">
+      <div class="order-form__grid">
+        <label><span>Ваше ім'я</span><input type="text" name="name" maxlength="80" required placeholder="Наприклад, Тетяна"></label>
+        <label><span>Телефон</span><input type="tel" name="phone" maxlength="25" required placeholder="+380..."></label>
+        <label class="order-form__full"><span>Текст до листівки</span><input type="text" name="cardText" maxlength="180" placeholder="Необов'язково"></label>
+        <label class="order-form__full"><span>Коментар</span><textarea name="comment" rows="3" maxlength="300" placeholder="Наприклад, зателефонувати за 30 хв до доставки"></textarea></label>
+        <label class="hp-field" aria-hidden="true"><span>Не заповнювати</span><input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <div class="order-form__status" id="orderFormStatus"></div>
+      <div class="order-form__actions">
+        <button class="btn btn-primary" type="submit">Підтвердити замовлення</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
