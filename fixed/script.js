@@ -287,26 +287,37 @@ if (backTopBtn) {
   backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-/* ── "Детальніше" — розгортання панелі ── */
+/* ── "Детальніше" — відкриває modal поверх ── */
+function openDetailModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+function closeDetailModal(modal) {
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
 document.querySelectorAll('.btn-details').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetId = btn.dataset.detail;
-    const panel    = document.getElementById(targetId);
-    if (!panel) return;
-    const isOpen = panel.classList.contains('is-open');
+  btn.addEventListener('click', () => openDetailModal(btn.dataset.modal));
+});
 
-    // Закрити всі інші
-    document.querySelectorAll('.offer-detail.is-open').forEach(p => {
-      p.classList.remove('is-open');
-      const b = document.querySelector(`[data-detail="${p.id}"]`);
-      if (b) b.classList.remove('is-open');
-    });
-
-    if (!isOpen) {
-      panel.classList.add('is-open');
-      btn.classList.add('is-open');
-    }
+document.querySelectorAll('[data-close-detail]').forEach(el => {
+  el.addEventListener('click', () => {
+    const modal = el.closest('.detail-modal');
+    closeDetailModal(modal);
   });
+});
+
+// Закрити detail modal на Escape (додаємо до існуючого listener)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.detail-modal.is-open').forEach(m => closeDetailModal(m));
+  }
 });
 
 /* ── Показ мініатюри букету у модалці ─── */

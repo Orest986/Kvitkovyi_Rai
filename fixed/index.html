@@ -18,7 +18,7 @@
       <a href="index.html" class="brand"><img src="assets/logo.svg" alt="Квітковий Рай"></a>
       <nav class="nav" id="navMenu">
         <a href="#about"    class="nav__link">Про нас</a>
-        <a href="#offers"   class="nav__link">Пропозиції</a>
+        <a href="#offers"   class="nav__link">Переваги</a>
         <a href="#popular"  class="nav__link">Букети</a>
         <a href="#location" class="nav__link">Локація</a>
         <a href="#contacts" class="nav__link">Контакти</a>
@@ -42,7 +42,7 @@
     <button class="nav-overlay__close" id="navClose" aria-label="Закрити меню">✕</button>
     <nav class="nav-overlay__nav">
       <a href="#about">Про нас</a>
-      <a href="#offers">Пропозиції</a>
+      <a href="#offers">Переваги</a>
       <a href="#popular">Букети</a>
       <a href="#location">Локація</a>
       <a href="#contacts">Контакти</a>
@@ -78,61 +78,25 @@
 
     <!-- OFFERS -->
     <section class="offers container" id="offers">
-      <h2 class="section-title">Наші пропозиції</h2>
+      <h2 class="section-title">Наші переваги</h2>
       <div class="offer-grid">
         <article class="card offer-card">
           <div class="visual"><img src="assets/offer-flower.svg" alt="Широкий вибір"></div>
           <h3>Широкий вибір</h3>
-          <p>Понад 50 видів квітів та композицій — від ніжних польових до розкішних троянд</p>
-          <button class="btn-details" data-detail="detail-1" type="button">
-            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="offer-detail" id="detail-1">
-            <div class="offer-detail__inner">
-              <ul>
-                <li>Еустоми, хризантеми, піони — у наявності щодня</li>
-                <li>Понад 50 сортів сезонних та екзотичних квітів</li>
-                <li>Готові букети та композиції під будь-який бюджет</li>
-                <li>Індивідуальне складання за вашими побажаннями</li>
-              </ul>
-            </div>
-          </div>
+          <p>Понад 50 сортів квітів щодня у наявності — підберемо ідеальний варіант для будь-якого приводу</p>
+          <button class="btn-details" data-modal="detail-1" type="button">Детальніше ›</button>
         </article>
         <article class="card offer-card">
           <div class="visual"><img src="assets/offer-hat.svg" alt="Майстри справи"></div>
           <h3>Майстри своєї справи</h3>
-          <p>Наші флористи з багаторічним досвідом створять букет, який вразить до глибини душі</p>
-          <button class="btn-details" data-detail="detail-2" type="button">
-            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="offer-detail" id="detail-2">
-            <div class="offer-detail__inner">
-              <ul>
-                <li>Флористи з досвідом від 5 років</li>
-                <li>Консультація по підбору букету — безкоштовно</li>
-                <li>Авторські техніки оформлення та пакування</li>
-                <li>Листівка та стрічка — у подарунок до кожного замовлення</li>
-              </ul>
-            </div>
-          </div>
+          <p>Кожен букет збирається вручну досвідченим флористом — з увагою до кожної деталі та стрічки</p>
+          <button class="btn-details" data-modal="detail-2" type="button">Детальніше ›</button>
         </article>
         <article class="card offer-card">
           <div class="visual"><img src="assets/offer-clock.svg" alt="Оптова торгівля"></div>
           <h3>Оптова торгівля</h3>
-          <p>Постачаємо свіжі квіти оптом для магазинів, флористів та агентств</p>
-          <button class="btn-details" data-detail="detail-3" type="button">
-            Детальніше <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="offer-detail" id="detail-3">
-            <div class="offer-detail__inner">
-              <ul>
-                <li>Відправка по всій Україні через Нову Пошту</li>
-                <li>Надійна упаковка для збереження свіжості у дорозі</li>
-                <li>Відстеження посилки на кожному етапі доставки</li>
-                <li>Оптові знижки від 10 букетів — уточнюйте умови</li>
-              </ul>
-            </div>
-          </div>
+          <p>Відправляємо свіжі квіти Новою Поштою по всій Україні з дбайливим пакуванням</p>
+          <button class="btn-details" data-modal="detail-3" type="button">Детальніше ›</button>
         </article>
       </div>
     </section>
@@ -146,6 +110,7 @@
           <h3>Сніжна Ніжність</h3>
           <div class="bouquet-card__actions">
             <span class="bouquet-card__price">1 850 грн</span>
+            <span class="bouquet-card__composition">Еустома біла — 15 шт.</span>
             <div class="bouquet-card__btns">
               <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order"    type="button">Замовити</button>
@@ -157,6 +122,7 @@
           <h3>Весняний Настрій</h3>
           <div class="bouquet-card__actions">
             <span class="bouquet-card__price">850 грн</span>
+            <span class="bouquet-card__composition">Еустома мікс — 9 шт.</span>
             <div class="bouquet-card__btns">
               <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order"    type="button">Замовити</button>
@@ -168,6 +134,7 @@
           <h3>Рожева Мрія</h3>
           <div class="bouquet-card__actions">
             <span class="bouquet-card__price">1 600 грн</span>
+            <span class="bouquet-card__composition">Еустома рожева — 12 шт.</span>
             <div class="bouquet-card__btns">
               <button class="btn btn-add-cart" type="button">До кошика</button>
               <button class="btn btn-order"    type="button">Замовити</button>
@@ -331,6 +298,53 @@
     </form>
   </div>
 </div>
+
+<!-- ── DETAIL MODALS ── -->
+<div class="detail-modal" id="detail-1" aria-hidden="true">
+  <div class="detail-modal__backdrop" data-close-detail></div>
+  <div class="detail-modal__box">
+    <button class="detail-modal__close" data-close-detail>×</button>
+    <div class="detail-modal__icon">🌸</div>
+    <h3 class="detail-modal__title">Широкий вибір</h3>
+    <ul class="detail-modal__list">
+      <li>Еустоми, хризантеми, піони — у наявності щодня</li>
+      <li>Понад 50 сортів сезонних та екзотичних квітів</li>
+      <li>Готові букети та композиції під будь-який бюджет</li>
+      <li>Індивідуальне складання за вашими побажаннями</li>
+    </ul>
+  </div>
+</div>
+
+<div class="detail-modal" id="detail-2" aria-hidden="true">
+  <div class="detail-modal__backdrop" data-close-detail></div>
+  <div class="detail-modal__box">
+    <button class="detail-modal__close" data-close-detail>×</button>
+    <div class="detail-modal__icon">👒</div>
+    <h3 class="detail-modal__title">Майстри своєї справи</h3>
+    <ul class="detail-modal__list">
+      <li>Флористи з досвідом від 5 років</li>
+      <li>Безкоштовна консультація по підбору букету</li>
+      <li>Авторські техніки оформлення та пакування</li>
+      <li>Листівка та стрічка — у подарунок до кожного замовлення</li>
+    </ul>
+  </div>
+</div>
+
+<div class="detail-modal" id="detail-3" aria-hidden="true">
+  <div class="detail-modal__backdrop" data-close-detail></div>
+  <div class="detail-modal__box">
+    <button class="detail-modal__close" data-close-detail>×</button>
+    <div class="detail-modal__icon">📦</div>
+    <h3 class="detail-modal__title">Оптова торгівля</h3>
+    <ul class="detail-modal__list">
+      <li>Відправка по всій Україні через Нову Пошту</li>
+      <li>Надійна упаковка для збереження свіжості у дорозі</li>
+      <li>Відстеження посилки на кожному етапі</li>
+      <li>Оптові знижки від 10 букетів — уточнюйте умови</li>
+    </ul>
+  </div>
+</div>
+
 
 <script src="script.js"></script>
 </body>
