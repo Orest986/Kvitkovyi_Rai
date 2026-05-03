@@ -22,7 +22,7 @@ img   { max-width: 100%; display: block }
 a     { text-decoration: none; color: inherit }
 button, input, textarea { font: inherit }
 
-.site-shell { overflow-x: clip; padding-top: var(--topbar-h) }  /* clip не ламає sticky */
+.site-shell { overflow-x: clip } /* без padding-top — hero йде під fixed хедер */
 .container  { width: min(var(--container), calc(100% - 48px)); margin: 0 auto; position: relative }
 
 .section-title {
@@ -32,6 +32,11 @@ button, input, textarea { font: inherit }
   line-height: .95;
   font-weight: 400;
   margin-bottom: 32px;
+}
+
+/* Щоб anchor-секції не ховались під fixed хедером */
+[id] {
+  scroll-margin-top: var(--topbar-h);
 }
 
 /* ── TOPBAR ─────────────────────────────── */
@@ -144,6 +149,7 @@ button, input, textarea { font: inherit }
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  /* Хедер fixed — hero займає весь viewport, але ми зміщуємо контент */
 }
 .hero::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 180px;
@@ -159,7 +165,7 @@ button, input, textarea { font: inherit }
 
 .hero-content {
   position: relative; z-index: 2;
-  padding: 0 0 120px; text-align: center;
+  padding: var(--topbar-h) 0 120px; text-align: center;
   width: 100%;
 }
 .hero h1 {
@@ -179,16 +185,16 @@ button, input, textarea { font: inherit }
   position: absolute; top: 18px; right: 20px; z-index: 10;
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px 10px 12px;
-  background: rgba(247,240,232,.72);
-  border: 1px solid rgba(205,179,159,.35);
+  background: rgba(242,232,220,.55);
+  border: 1px solid rgba(173,143,120,.30);
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(80,57,42,.10);
+  box-shadow: none;
   color: var(--text); max-width: 290px;
   transition: transform .22s, background .22s;
 }
 .insta-banner:hover {
   transform: translateY(-2px);
-  background: rgba(247,240,232,.88);
+  background: rgba(242,232,220,.75);
 }
 .insta-banner__icon { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0 }
 .insta-banner__text { display: flex; flex-direction: column; gap: 2px }
@@ -423,7 +429,8 @@ button, input, textarea { font: inherit }
 /* ── CATALOG HERO ───────────────────────── */
 .catalog-hero {
   position: relative;
-  min-height: 280px; padding: 40px 0 44px;
+  min-height: 280px;
+  padding: calc(var(--topbar-h) + 32px) 0 44px; /* враховуємо fixed хедер */
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden; text-align: center;
 }
