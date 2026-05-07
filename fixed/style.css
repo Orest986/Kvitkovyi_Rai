@@ -144,10 +144,11 @@ button, input, textarea { font: inherit }
 /* ── HERO ───────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 580px;
+  min-height: min(760px, 100svh);
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
-  padding-bottom: 80px;
+  padding-top: var(--topbar-h);
+  padding-bottom: 42px;
 }
 .hero::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: 130px;
@@ -163,16 +164,16 @@ button, input, textarea { font: inherit }
 
 .hero-content {
   position: relative; z-index: 2;
-  padding: 64px 0 20px; text-align: center;
+  padding: 34px 0 14px; text-align: center;
 }
 .hero h1 {
   font-family: "Great Vibes","Times New Roman",cursive;
-  font-size: clamp(60px, 8vw, 96px);
+  font-size: clamp(56px, 7.4vw, 92px);
   line-height: .95; font-weight: 400;
   margin-bottom: 16px;
 }
 .hero p {
-  font-size: clamp(18px, 2.2vw, 28px);
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 600; line-height: 1.2;
   max-width: 540px; margin: 0 auto;
 }
@@ -480,10 +481,10 @@ button, input, textarea { font: inherit }
   display: flex; flex-direction: column; height: 100%;
 }
 .product-card .image-wrap {
-  min-height: 200px; flex: 1;
-  display: flex; align-items: flex-end; justify-content: center; margin-bottom: 10px;
+  min-height: 230px; flex: 0 0 230px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
 }
-.product-card .image-wrap img { max-height: 190px; width: auto; object-fit: contain }
+.product-card .image-wrap img { max-height: 205px; width: auto; object-fit: contain }
 .product-card .image-wrap img[src$=".png"] { mix-blend-mode: multiply }
 
 .product-title {
@@ -491,7 +492,7 @@ button, input, textarea { font: inherit }
   border-radius: 999px; background: var(--accent);
   color: #241a14; font-size: clamp(17px, 1.6vw, 22px); font-weight: 700; line-height: 1.2;
 }
-.product-card h3 { text-align: center; margin: 6px 0 }
+.product-card h3 { text-align: center; margin: 10px 0 6px; position: relative; z-index: 2 }
 
 /* Кнопки на картці — в один рядок */
 .product-bottom {
@@ -725,8 +726,8 @@ body.modal-open { overflow: hidden }
   :root { --container: 1280px; --topbar-h: 96px }
   .nav { gap: 44px; font-size: 21px }
   .brand img { width: 200px }
-  .hero h1 { font-size: 104px }
-  .hero p  { font-size: 26px; max-width: 580px }
+  .hero h1 { font-size: 96px }
+  .hero p  { font-size: 25px; max-width: 580px }
   .hero-bouquet { width: min(54vw, 780px); margin-top: -250px }
   .section-title { font-size: 78px }
   .offer-grid { gap: 28px }
@@ -739,8 +740,8 @@ body.modal-open { overflow: hidden }
   :root { --container: 1180px; --topbar-h: 92px }
   .nav { gap: 40px; font-size: 20px }
   .brand img { width: 195px }
-  .hero h1 { font-size: 100px }
-  .hero p  { font-size: 25px }
+  .hero h1 { font-size: 92px }
+  .hero p  { font-size: 24px }
   .hero-bouquet { width: min(54vw, 720px); margin-top: -240px }
   .section-title { font-size: 74px }
   .offer-grid { gap: 26px }
@@ -793,7 +794,7 @@ body.modal-open { overflow: hidden }
   .hero-bouquet { width: min(72vw, 480px); margin-top: -160px }
   .hero h1 { font-size: clamp(48px, 8vw, 72px) }
   .hero p  { font-size: clamp(16px, 2.5vw, 22px) }
-  .hero-content { padding-bottom: 100px }
+  .hero-content { padding-top: 26px; padding-bottom: 90px }
 
   .offer-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto }
   .bouquet-grid { grid-template-columns: repeat(2, 1fr); gap: 18px }
@@ -819,8 +820,8 @@ body.modal-open { overflow: hidden }
   .insta-banner__sub   { display: none }
   .hero-bouquet { width: min(76vw, 440px); margin-top: -140px }
   .catalog-hero-decor { width: min(28vw, 180px) }
-  .product-card .image-wrap { min-height: 160px }
-  .product-card .image-wrap img { max-height: 150px }
+  .product-card .image-wrap { min-height: 185px; flex-basis: 185px; margin-bottom: 18px }
+  .product-card .image-wrap img { max-height: 165px }
   .location-card { padding: 22px 18px }
 }
 
@@ -837,7 +838,7 @@ body.modal-open { overflow: hidden }
   .hero-decor { width: 40vw }
   .hero::after { height: 100px }
   .hero-bouquet { width: min(84vw, 360px); margin-top: -110px }
-  .hero-content { padding-bottom: 80px }
+  .hero-content { padding-top: 22px; padding-bottom: 70px }
   .insta-banner { display: none }
 
   .offers { padding: 32px 0 24px }
@@ -858,8 +859,8 @@ body.modal-open { overflow: hidden }
   .catalog-hero-decor { width: 30vw }
   .catalog-petals-decor { top: 110px; width: 70vw }
   .product-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto }
-  .product-card .image-wrap { min-height: 180px }
-  .product-card .image-wrap img { max-height: 170px }
+  .product-card .image-wrap { min-height: 200px; flex-basis: 200px; margin-bottom: 18px }
+  .product-card .image-wrap img { max-height: 180px }
 
   /* Кнопки каталогу — вертикально на малих */
   .product-bottom { flex-wrap: wrap }
