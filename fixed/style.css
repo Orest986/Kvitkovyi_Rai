@@ -141,23 +141,21 @@ button, input, textarea { font: inherit }
 .nav-overlay__social a { transition: transform .2s }
 .nav-overlay__social a:hover { transform: translateY(-3px) }
 
-/* ── HERO — точно 100vh ─────────────────── */
+/* ── HERO ───────────────────────────────── */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 500px;
+  min-height: 580px;
   background: url("assets/hero-bg.png") center top / cover no-repeat;
   overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-  /* Хедер fixed — hero займає весь viewport, але ми зміщуємо контент */
+  padding-bottom: 80px;
 }
 .hero::after {
-  content: ""; position: absolute; inset: auto 0 0 0; height: 180px;
-  background: linear-gradient(to bottom, transparent, rgba(242,234,223,.75) 55%, rgba(242,234,223,1));
-  pointer-events: none; z-index: 3;
+  content: ""; position: absolute; inset: auto 0 0 0; height: 130px;
+  background: linear-gradient(to bottom, transparent, rgba(242,234,223,.7) 60%, rgba(242,234,223,1));
+  pointer-events: none;
 }
 .hero-decor {
-  position: absolute; top: 0; width: min(26vw, 360px);
+  position: absolute; top: 0; width: min(28vw, 380px);
   pointer-events: none; z-index: 1;
 }
 .hero-decor.left  { left: 0 }
@@ -165,19 +163,18 @@ button, input, textarea { font: inherit }
 
 .hero-content {
   position: relative; z-index: 2;
-  padding: var(--topbar-h) 0 120px; text-align: center;
-  width: 100%;
+  padding: 64px 0 20px; text-align: center;
 }
 .hero h1 {
   font-family: "Great Vibes","Times New Roman",cursive;
-  font-size: clamp(54px, 7vw, 96px);
+  font-size: clamp(60px, 8vw, 96px);
   line-height: .95; font-weight: 400;
   margin-bottom: 16px;
 }
 .hero p {
-  font-size: clamp(16px, 1.8vw, 26px);
+  font-size: clamp(18px, 2.2vw, 28px);
   font-weight: 600; line-height: 1.2;
-  max-width: 520px; margin: 0 auto;
+  max-width: 540px; margin: 0 auto;
 }
 
 /* Instagram banner */
@@ -202,17 +199,21 @@ button, input, textarea { font: inherit }
 .insta-banner__sub   { font-size: 11.5px; font-weight: 500; color: var(--muted); line-height: 1.2 }
 .insta-banner__arrow { font-size: 17px; color: var(--accent-dark); margin-left: 4px }
 
-/* ── SHOWCASE ──────────────────────────── */
+/* ── SHOWCASE (2nd screen) ──────────────── */
 .showcase {
   position: relative;
   background: url("assets/section-bg.png") center top / cover no-repeat;
+  background-attachment: scroll;
+  margin-top: 0;
+  padding-top: 0;
   z-index: 2;
 }
 
+/* Букет між секціями */
 .hero-bouquet {
   display: block;
-  width: min(58vw, 680px);
-  margin: -240px auto 0;
+  width: min(62vw, 720px);
+  margin: -220px auto 0;
   position: relative; z-index: 5;
   pointer-events: none;
   filter: drop-shadow(0 24px 48px rgba(80,57,42,.16));
