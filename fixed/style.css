@@ -799,7 +799,16 @@ body.modal-open { overflow: hidden }
   .offer-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto }
   .bouquet-grid { grid-template-columns: repeat(2, 1fr); gap: 18px }
 
-  .location-grid { grid-template-columns: 1fr }
+  .offer-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        grid-auto-flow: row !important;
+        gap: 18px !important;
+        width: 100%;
+        max-width: none !important;
+        margin: 0 auto !important;
+        align-items: stretch;
+    }
   .map-wrap { min-height: 280px }
   .map-wrap iframe { min-height: 280px }
   .footer-grid { grid-template-columns: 1fr }
