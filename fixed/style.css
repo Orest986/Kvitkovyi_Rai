@@ -679,7 +679,7 @@ body.modal-open { overflow: hidden }
 /* ── ЛОКАЦІЯ ────────────────────────────── */
 .location-section {
   position: relative; padding: 80px 0 90px;
-  background: url("assets/section-bg.png") center / cover no-repeat;
+  background: url("assets/section-bg_2.png") center / cover no-repeat;
   overflow: hidden;
 }
 .loc-decor { position: absolute; width: min(22vw, 280px); pointer-events: none; opacity: .7 }
@@ -934,7 +934,7 @@ body.modal-open { overflow: hidden }
 
 @media (max-width: 900px) {
   .hero {
-    min-height: clamp(540px, 100svh, 680px);
+    min-height: clamp(320px, 100svh, 320px);
     background-size: auto 100%;
     background-position: center top;
   }
@@ -946,7 +946,7 @@ body.modal-open { overflow: hidden }
 
   .hero h1 {
     font-size: clamp(50px, 10vw, 72px);
-    line-height: .98;
+    line-height: .98;   
   }
 
   .hero p {
@@ -993,7 +993,7 @@ body.modal-open { overflow: hidden }
 
 @media (max-width: 768px) {
   .hero {
-    min-height: clamp(520px, 100svh, 640px);
+    min-height: clamp(200px, 100svh, 200px);
   }
 
   .hero-content {
